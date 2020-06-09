@@ -10,6 +10,7 @@ import {
     ResizeObserverClassDefinition,
 } from "./resize-observer";
 import { ResizeObserverEntry } from "./resize-observer-entry";
+import { takeRightWhile } from 'lodash-es';
 
 declare global {
     interface WindowWithResizeObserver extends Window {
@@ -219,6 +220,11 @@ export class AnchoredRegion extends FASTElement {
      */
     public region: HTMLDivElement;
 
+    /**
+     * reference to the component root
+     */
+    public root: HTMLDivElement;
+
     private openRequestAnimationFrame: boolean = false;
     private currentDirection: Direction = Direction.ltr;
 
@@ -366,8 +372,12 @@ export class AnchoredRegion extends FASTElement {
      * Gets the viewport element by id, or defaults to component parent
      */
     public getViewport = (): HTMLElement | null => {
-        if (typeof this.viewport !== "string") {
-            return this.region.parentElement;
+        if (
+            typeof this.viewport !== "string" ||
+            this.viewport === "" ||
+            this.root !== null
+        ) {
+            return this.root.parentElement;
         }
 
         return document.getElementById(this.viewport);
