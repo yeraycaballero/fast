@@ -197,13 +197,9 @@ export class Carousel extends FASTElement {
     // (undocumented)
     carousel: HTMLDivElement;
     // (undocumented)
-    connectedCallback(): void;
-    // (undocumented)
-    disconnectedCallback(): void;
-    // (undocumented)
     filteredItems: HTMLElement[];
     // (undocumented)
-    handleTabClick(e: Event): void;
+    handleTabClick(index: number): (e: Event) => void;
     // (undocumented)
     items: HTMLElement[];
     // (undocumented)
@@ -214,6 +210,8 @@ export class Carousel extends FASTElement {
     paused: boolean;
     // (undocumented)
     tabs: HTMLElement[];
+    // (undocumented)
+    tabsChanged(): void;
 }
 
 // @public (undocumented)
