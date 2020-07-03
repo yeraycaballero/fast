@@ -225,6 +225,8 @@ export class Carousel extends FASTElement {
 
 // @public
 export class CarouselSlide extends FASTElement {
+    // (undocumented)
+    even: boolean;
 }
 
 // @public
@@ -1130,7 +1132,7 @@ export class TreeView extends FASTElement {
     // @deprecated (undocumented)
     handleFocus: (e: FocusEvent) => void;
     // (undocumented)
-    handleKeyDown: (e: KeyboardEvent) => void | boolean;
+    handleKeyDown: (e: KeyboardEvent) => boolean | void;
     // (undocumented)
     renderCollapsedNodes: boolean;
     // (undocumented)
