@@ -184,15 +184,15 @@ export const CardTemplate: import("@microsoft/fast-element").ViewTemplate<Card, 
 // @public
 export class Carousel extends FASTElement {
     // (undocumented)
-    activeId: string;
+    activeid: string;
     // (undocumented)
-    activeIdChanged(): void;
+    activeidChanged(): void;
     // (undocumented)
-    ariaDescribedby: string;
+    activeSlide: HTMLElement;
     // (undocumented)
-    ariaLabel: string;
+    arialabel: string;
     // (undocumented)
-    ariaLabelledby: string;
+    arialabelledby: string;
     // (undocumented)
     autoplay: boolean;
     // (undocumented)
@@ -208,7 +208,7 @@ export class Carousel extends FASTElement {
     // (undocumented)
     handleFlipperClick(direction: 1 | -1, e: Event): void;
     // (undocumented)
-    handleKeypress: (direction: 1 | -1, e: KeyboardEvent) => void;
+    handleFlipperKeypress: (direction: 1 | -1, e: KeyboardEvent) => void;
     // (undocumented)
     handlePlayClick(e: Event): void;
     // (undocumented)
@@ -220,7 +220,11 @@ export class Carousel extends FASTElement {
     // (undocumented)
     paused: boolean;
     // (undocumented)
+    pausedChanged(): void;
+    // (undocumented)
     tabbed: boolean;
+    // (undocumented)
+    tabs: HTMLElement;
     }
 
 // @public
@@ -1132,7 +1136,7 @@ export class TreeView extends FASTElement {
     // @deprecated (undocumented)
     handleFocus: (e: FocusEvent) => void;
     // (undocumented)
-    handleKeyDown: (e: KeyboardEvent) => boolean | void;
+    handleKeyDown: (e: KeyboardEvent) => void | boolean;
     // (undocumented)
     renderCollapsedNodes: boolean;
     // (undocumented)
