@@ -188,8 +188,6 @@ export class Carousel extends FASTElement {
     // (undocumented)
     activeidChanged(): void;
     // (undocumented)
-    activeSlide: HTMLElement;
-    // (undocumented)
     arialabel: string;
     // (undocumented)
     arialabelledby: string;
@@ -206,11 +204,11 @@ export class Carousel extends FASTElement {
     // (undocumented)
     filteredItems: HTMLElement[];
     // (undocumented)
+    focused: boolean;
+    // (undocumented)
     handleFlipperClick(direction: 1 | -1, e: Event): void;
     // (undocumented)
     handleFlipperKeypress: (direction: 1 | -1, e: KeyboardEvent) => void;
-    // (undocumented)
-    handlePlayClick(e: Event): void;
     // (undocumented)
     items: HTMLElement[];
     // (undocumented)
@@ -218,9 +216,15 @@ export class Carousel extends FASTElement {
     // (undocumented)
     loop: boolean;
     // (undocumented)
+    nextButtonItem: HTMLElement[];
+    // (undocumented)
     paused: boolean;
     // (undocumented)
     pausedChanged(): void;
+    // (undocumented)
+    previousButtonItem: HTMLElement[];
+    // (undocumented)
+    rotationControl: HTMLElement;
     // (undocumented)
     tabbed: boolean;
     // (undocumented)
