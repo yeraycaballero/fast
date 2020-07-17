@@ -230,6 +230,13 @@ export class Carousel extends FASTElement {
     }
 
 // @public
+export class CarouselSlide extends FASTElement {
+}
+
+// @public
+export const CarouselSlideTemplate: import("@microsoft/fast-element").ViewTemplate<CarouselSlide, any>;
+
+// @public
 export const CarouselTemplate: ViewTemplate<Carousel, any>;
 
 // @public
