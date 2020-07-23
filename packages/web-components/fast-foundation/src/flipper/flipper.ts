@@ -1,4 +1,6 @@
 import { attr, booleanConverter, FASTElement } from "@microsoft/fast-element";
+import { applyMixins } from "../utilities";
+import { ARIAGlobalStatesAndProperties } from "../patterns";
 import { FlipperDirection } from "./flipper.options";
 
 export { FlipperDirection };
@@ -40,3 +42,13 @@ export class Flipper extends FASTElement {
     @attr
     public direction: FlipperDirection = FlipperDirection.next;
 }
+
+/**
+ * Mark internal because exporting class and interface of the same name
+ * confuses API documenter.
+ * TODO: https://github.com/microsoft/fast/issues/3317
+ * @internal
+ */
+/* eslint-disable-next-line */
+export interface Flipper extends ARIAGlobalStatesAndProperties {}
+applyMixins(Flipper, ARIAGlobalStatesAndProperties);

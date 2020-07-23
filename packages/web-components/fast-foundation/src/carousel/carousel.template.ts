@@ -73,7 +73,7 @@ export const CarouselTemplate = html<Carousel>`
         <slot name="previous-button" part="previous-button" ${slotted(
             "previousButtonItem"
         )}>
-            <fast-flipper aria-hidden="${x =>
+            <fast-flipper aria-label="previous slide" aria-hidden="${x =>
                 !x.basicPattern ? "true" : "false"}" direction=${
     FlipperDirection.previous
 }>
@@ -85,7 +85,7 @@ export const CarouselTemplate = html<Carousel>`
         @keypress=${(x, c) => x.handleFlipperKeypress(1, c.event as KeyboardEvent)}
     >
         <slot name="next-button" part="next-button" ${slotted("nextButtonItem")}>
-            <fast-flipper aria-hidden="${x =>
+            <fast-flipper aria-label="next slide" aria-hidden="${x =>
                 !x.basicPattern ? "true" : "false"}" direction=${FlipperDirection.next}>
         </slot>
     </div>

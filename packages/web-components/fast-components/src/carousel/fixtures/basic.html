@@ -52,7 +52,11 @@
             <fast-carousel-test-slide even>Slide 4</fast-carousel-test-slide>
             <fast-carousel-test-slide>Slide 5</fast-carousel-test-slide>
             <fast-carousel-test-slide even>Slide 6</fast-carousel-test-slide>
-            <fast-button appearance="accent" slot="rotation-control">
+            <fast-button
+                appearance="accent"
+                slot="rotation-control"
+                aria-labe="start and stop slide rotation"
+            >
                 <svg
                     viewBox="0 0 16 16"
                     width="16px"
@@ -72,7 +76,7 @@
                     <path d="M5 2H6V14H5V2ZM11 2V14H10V2H11Z"></path>
                 </svg>
             </fast-button>
-            <fast-button appearance="accent" slot="next-button">
+            <fast-button appearance="accent" slot="next-button" aria-label="next slide">
                 <svg
                     viewBox="0 0 16 16"
                     width="16px"
@@ -84,7 +88,11 @@
                     ></path>
                 </svg>
             </fast-button>
-            <fast-button appearance="accent" slot="previous-button">
+            <fast-button
+                appearance="accent"
+                slot="previous-button"
+                aria-label="previous slide"
+            >
                 <svg
                     viewBox="0 0 16 16"
                     width="16px"

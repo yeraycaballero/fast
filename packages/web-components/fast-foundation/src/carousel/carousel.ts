@@ -7,6 +7,8 @@ import {
     limit,
     KeyCodes,
 } from "@microsoft/fast-web-utilities";
+import { applyMixins } from "../utilities";
+import { ARIAGlobalStatesAndProperties } from "../patterns";
 
 /**
  * An Carousel Custom HTML Element.
@@ -380,3 +382,6 @@ export class Carousel extends Tabs {
         this.stopAutoPlay();
     }
 }
+
+export interface Carousel extends ARIAGlobalStatesAndProperties {}
+applyMixins(Carousel, ARIAGlobalStatesAndProperties);
