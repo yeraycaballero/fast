@@ -5,20 +5,18 @@ import {
     neutralForegroundRestBehavior,
     neutralFocusBehavior,
 } from "../styles/recipes";
-import { focusVisible } from "@microsoft/fast-foundation";
+import { focusVisible, display } from "@microsoft/fast-foundation";
 
 export const CarouselStyles = css`
-    :host {
+    ${display("inline-flex")} :host {
         box-sizing: border-box;
         font-family: var(--body-font);
         font-size: var(--type-ramp-minus-1-font-size);
         line-height: var(--type-ramp-minus-1-font-size);
         color: var(--neutral-foreground-rest);
-        display: inline-flex;
         align-items: center;
         justify-content: space-evenly;
         height: 100%;
-        min-height: 50px;
         width: 100%;
         position: relative;
         overflow: hidden;
