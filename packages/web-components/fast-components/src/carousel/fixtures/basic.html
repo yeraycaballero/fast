@@ -30,7 +30,7 @@
         <fast-carousel
             style="width: 700px;"
             autoplay="false"
-            activeid="slide-3"
+            activeslideid="slide-3"
             aria-label="test images"
             basicpattern
         >
@@ -55,7 +55,7 @@
             <fast-button
                 appearance="accent"
                 slot="rotation-control"
-                aria-labe="start and stop slide rotation"
+                aria-label="start and stop slide rotation"
             >
                 <svg
                     viewBox="0 0 16 16"
@@ -128,7 +128,7 @@
             <fast-carousel-test-slide even>
                 <button>Slide 6</button>
             </fast-carousel-test-slide>
-            <fast-button appearance="accent" slot="next-button">
+            <fast-button appearance="accent" slot="next-button" aria-label="next slide">
                 <svg
                     viewBox="0 0 16 16"
                     width="16px"
@@ -140,7 +140,11 @@
                     ></path>
                 </svg>
             </fast-button>
-            <fast-button appearance="accent" slot="previous-button">
+            <fast-button
+                appearance="accent"
+                slot="previous-button"
+                aria-label="previous slide"
+            >
                 <svg
                     viewBox="0 0 16 16"
                     width="16px"
@@ -188,7 +192,7 @@
             <fast-carousel-test-slide>Slide 3</fast-carousel-test-slide>
             <fast-carousel-test-slide even>Slide 4</fast-carousel-test-slide>
             <fast-carousel-test-slide>Slide 5</fast-carousel-test-slide>
-            <fast-carousel-test-slide even>Slide 6</fast-carousel-test-slide>
+            <fast-carousel-test-slide even tabindex="0">Slide 6</fast-carousel-test-slide>
         </fast-carousel>
     </div>
     <h4>Default 40 Slides</h4>

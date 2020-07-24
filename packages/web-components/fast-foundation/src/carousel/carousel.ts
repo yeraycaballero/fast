@@ -88,17 +88,20 @@ export class Carousel extends Tabs {
         this.change();
     }
 
-    @observable
     public activeindicator = false;
+
+    @observable
     public activeSlideIndex: number = 0;
-    public basicContentRef: HTMLDivElement;
+    public basicContent: HTMLDivElement;
     public carousel: HTMLDivElement;
-    public previousButtonItem: HTMLElement[];
-    public nextButtonItem: HTMLElement[];
+    public previousFlipperDefault: HTMLElement;
+    public previousFlipperSlottedItem: HTMLElement[];
+    public nextFlipperDefault: HTMLElement;
+    public nextFlipperSlottedItem: HTMLElement[];
     public rotationControl: HTMLElement;
     public rotationControlItem: HTMLElement[];
-    public tabsRef: HTMLElement;
-    public tabPanelsRef: HTMLElement;
+    public tablistRef: HTMLElement;
+    public tabPanelsContainerRef: HTMLElement;
 
     @observable
     public items: HTMLElement[];
@@ -153,7 +156,22 @@ export class Carousel extends Tabs {
 
     public handleFlipperKeypress = (direction: 1 | -1, e: KeyboardEvent): void => {
         switch (e.keyCode) {
+            case keyCodeSpace:
+                if (
+                    e.target !== this.nextFlipperDefault &&
+                    e.target !== this.previousFlipperDefault
+                ) {
+                    break;
+                }
             case keyCodeEnter:
+                this.paused = true;
+                this.incrementSlide(direction);
+                break;
+        }
+    };
+
+    public handleDefaultFlipperKeypress = (direction: 1 | -1, e: KeyboardEvent): void => {
+        switch (e.keyCode) {
             case keyCodeSpace:
                 this.paused = true;
                 this.incrementSlide(direction);
@@ -357,23 +375,29 @@ export class Carousel extends Tabs {
         this.rotationControl.addEventListener("keydown", this.handleRotationKeyDown);
 
         if (!this.basicPattern) {
-            this.tabsRef.addEventListener("keydown", this.handleTabsKeypress);
-            this.tabsRef.addEventListener("focusin", this.handleTabsFocusIn);
-            this.tabsRef.addEventListener("focusout", this.handleTabsFocusOut);
+            this.tablistRef.addEventListener("keydown", this.handleTabsKeypress);
+            this.tablistRef.addEventListener("focusin", this.handleTabsFocusIn);
+            this.tablistRef.addEventListener("focusout", this.handleTabsFocusOut);
 
-            this.tabPanelsRef.addEventListener("focusin", this.handleMouseOver);
-            this.tabPanelsRef.addEventListener("focusout", this.handleMouseLeave);
+            this.tabPanelsContainerRef.addEventListener("focusin", this.handleMouseOver);
+            this.tabPanelsContainerRef.addEventListener(
+                "focusout",
+                this.handleMouseLeave
+            );
 
-            if (this.previousButtonItem.length && this.nextButtonItem.length) {
+            if (
+                this.previousFlipperSlottedItem.length &&
+                this.nextFlipperSlottedItem.length
+            ) {
                 // sethdonohue - when tabbed the next and previous buttons should not be in the tab sequence
                 DOM.queueUpdate(() => {
-                    this.previousButtonItem[0].setAttribute("tabindex", "-1");
-                    this.nextButtonItem[0].setAttribute("tabindex", "-1");
+                    this.previousFlipperSlottedItem[0].setAttribute("tabindex", "-1");
+                    this.nextFlipperSlottedItem[0].setAttribute("tabindex", "-1");
                 });
             }
         } else {
-            this.basicContentRef.addEventListener("focusin", this.handleMouseOver);
-            this.basicContentRef.addEventListener("focusout", this.handleMouseLeave);
+            this.basicContent.addEventListener("focusin", this.handleMouseOver);
+            this.basicContent.addEventListener("focusout", this.handleMouseLeave);
         }
     }
 

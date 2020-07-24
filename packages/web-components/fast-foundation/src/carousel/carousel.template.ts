@@ -14,17 +14,17 @@ const pauseIcon: string = `<svg viewBox="0 0 16 16" width="16px" height="16px" x
 const playIcon: string = `<svg viewBox="0 0 16 16" width="16px" height="16px" xmlns="http://www.w3.org/2000/svg"><path d="M1 0V16L15.0083 8L1 0Z"></path></svg>`;
 
 const basicTemplate: ViewTemplate = html<Carousel>`
-    <div class="carousel-content" ${ref("basicContentRef")}>
+    <div class="carousel-content" ${ref("basicContent")}>
         <slot ${slotted({ property: "items", filter: elements() })}></slot>
     </div>
 `;
 
 const tabbedTemplate: ViewTemplate = html<Carousel>`
     <div class="carousel-content">
-        <div class="tablist" part="tablist" role="tablist" ${ref("tabsRef")}>
+        <div class="tablist" part="tablist" role="tablist" ${ref("tablistRef")}>
             <slot class="tab" name="tab" part="tab" ${slotted("tabs")}></slot>
         </div>
-        <div class="tabpanel" ${ref("tabPanelsRef")}>
+        <div class="tabpanel" ${ref("tabPanelsContainerRef")}>
             <slot name="tabpanel" part="tabpanel" ${slotted("tabpanels")}></slot>
         </div>
     </div>
@@ -71,12 +71,14 @@ export const CarouselTemplate = html<Carousel>`
         @keypress=${(x, c) => x.handleFlipperKeypress(-1, c.event as KeyboardEvent)}
     >
         <slot name="previous-button" part="previous-button" ${slotted(
-            "previousButtonItem"
+            "previousFlipperSlottedItem"
         )}>
             <fast-flipper aria-label="previous slide" aria-hidden="${x =>
                 !x.basicPattern ? "true" : "false"}" direction=${
     FlipperDirection.previous
-}>
+}
+                ${ref("previousFlipperDefault")}
+>
         </slot>
     </div>
     <div
@@ -84,9 +86,11 @@ export const CarouselTemplate = html<Carousel>`
         @click=${(x, c) => x.handleFlipperClick(1, c.event as MouseEvent)}
         @keypress=${(x, c) => x.handleFlipperKeypress(1, c.event as KeyboardEvent)}
     >
-        <slot name="next-button" part="next-button" ${slotted("nextButtonItem")}>
+        <slot name="next-button" part="next-button" ${slotted("nextFlipperSlottedItem")}>
             <fast-flipper aria-label="next slide" aria-hidden="${x =>
-                !x.basicPattern ? "true" : "false"}" direction=${FlipperDirection.next}>
+                !x.basicPattern ? "true" : "false"}" direction=${FlipperDirection.next}
+                ${ref("nextFlipperDefault")}
+            >
         </slot>
     </div>
     ${when(x => !x.basicPattern, tabbedTemplate)}
