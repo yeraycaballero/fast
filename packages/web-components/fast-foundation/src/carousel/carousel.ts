@@ -93,7 +93,6 @@ export class Carousel extends Tabs {
     @observable
     public activeSlideIndex: number = 0;
     public basicContent: HTMLDivElement;
-    public carousel: HTMLDivElement;
     public previousFlipperDefault: HTMLElement;
     public previousFlipperSlottedItem: HTMLElement[];
     public nextFlipperDefault: HTMLElement;
@@ -181,7 +180,7 @@ export class Carousel extends Tabs {
 
     public change = (): void => {
         // sethdonohue - reference to carousel is passed for the author to get access to the paused, activeSlideId, and other states.
-        this.$emit("change", this.carousel);
+        this.$emit("change", this);
     };
 
     public adjust(adjustment: number): void {
@@ -349,7 +348,7 @@ export class Carousel extends Tabs {
         // sethdonohue - if we focus out of tabs or any tabs children we need to ensure tabs doesn't steal focus
         this.focused = false;
         // sethdonohue - if we focus outside of the carousel then first focus needs to be reset
-        if (!this.carousel.contains(e.relatedTarget as Node)) {
+        if (!this.contains(e.relatedTarget as Node)) {
             this.firstFocus = true;
         }
     };
@@ -363,12 +362,12 @@ export class Carousel extends Tabs {
         }
 
         // sethdonohue - per ARIA autoplay must pause when mouse is hovering over the carousel
-        this.carousel.addEventListener("mouseover", this.handleMouseOver);
-        this.carousel.addEventListener("mouseleave", this.handleMouseLeave);
+        this.addEventListener("mouseover", this.handleMouseOver);
+        this.addEventListener("mouseleave", this.handleMouseLeave);
 
         // sethdonohue - per ARIA rotating must stop when keyboard focus enters the carousel and not restart unless the user explicitly requests it to.
-        this.carousel.addEventListener("focusin", this.handleFocusIn);
-        this.carousel.addEventListener("blur", this.handleBlur);
+        this.addEventListener("focusin", this.handleFocusIn);
+        this.addEventListener("blur", this.handleBlur);
 
         // sethdonohue - using mousedown as this fires before focusin so we can account for the first click on the rotation control and the focus immediately following click. This also requires the use of keydown since click is not used
         this.rotationControl.addEventListener("mousedown", this.handleRotationMouseDown);

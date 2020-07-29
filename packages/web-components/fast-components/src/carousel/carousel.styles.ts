@@ -1,10 +1,5 @@
 import { css } from "@microsoft/fast-element";
-import {
-    accentFillRestBehavior,
-    neutralDividerRestBehavior,
-    neutralForegroundRestBehavior,
-    neutralFocusBehavior,
-} from "../styles/recipes";
+import { neutralForegroundRestBehavior, neutralFocusBehavior } from "../styles/recipes";
 import { focusVisible, display } from "@microsoft/fast-foundation";
 
 export const CarouselStyles = css`
@@ -13,7 +8,7 @@ export const CarouselStyles = css`
         font-family: var(--body-font);
         font-size: var(--type-ramp-minus-1-font-size);
         line-height: var(--type-ramp-minus-1-font-size);
-        color: var(--neutral-foreground-rest);
+        color: ${neutralForegroundRestBehavior.var};
         align-items: center;
         justify-content: space-evenly;
         height: 100%;
@@ -114,8 +109,4 @@ export const CarouselStyles = css`
         top: 10px;
         z-index: 1;
     }
-`.withBehaviors(
-    accentFillRestBehavior,
-    neutralDividerRestBehavior,
-    neutralForegroundRestBehavior
-);
+`.withBehaviors(neutralForegroundRestBehavior, neutralFocusBehavior);

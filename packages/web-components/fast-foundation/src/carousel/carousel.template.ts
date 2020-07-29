@@ -38,7 +38,6 @@ export const CarouselTemplate = html<Carousel>`
 <template
     role="group"
     aria-roledescription="carousel"
-    ${ref("carousel")}
 >
     <div
         class="rotation-control"

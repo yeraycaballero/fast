@@ -31,4 +31,3 @@ export * from "./text-field/index";
 export * from "./tooltip/index";
 export * from "./tree-view/index";
 export * from "./tree-item/index";
-export * from "./utilities/components/carousel-test-slide";
