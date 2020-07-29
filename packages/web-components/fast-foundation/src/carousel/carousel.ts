@@ -39,13 +39,13 @@ export class Carousel extends Tabs {
         }
     }
 
-    @attr({ attribute: "basicpattern", mode: "boolean" })
+    @attr({ attribute: "basic-pattern", mode: "boolean" })
     public basicPattern: boolean = false;
 
     @attr({ attribute: "autoplay-interval" })
     public autoplayInterval: number = 6000;
 
-    @attr({ attribute: "activeslideid" })
+    @attr({ attribute: "active-slide-id" })
     public activeSlideId: string;
     public activeSlideIdChanged(): void {
         this.activeSlideIndex = this.slideIds.indexOf(this.activeSlideId);
@@ -56,6 +56,12 @@ export class Carousel extends Tabs {
 
     @attr({ attribute: "aria-label" })
     public arialabel: string;
+
+    @attr({ attribute: "next-button-aria-label", mode: "fromView" })
+    public nextButtonAriaLabel: string = "next slide";
+
+    @attr({ attribute: "previous-button-aria-label", mode: "fromView" })
+    public previousButtonAriaLabel: string = "previous slide;";
 
     @observable
     public focused: boolean = false;

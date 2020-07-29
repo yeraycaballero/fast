@@ -1,6 +1,6 @@
-import { FASTDesignSystemProvider } from "../../../../design-system-provider";
+import { FASTDesignSystemProvider } from "../../../design-system-provider";
 import Examples from "./fixtures/base.html";
-import { FASTCarouselTestSlide } from ".";
+import { FASTCarouselTestSlide } from "..";
 
 //Prevent tree-shaking
 FASTCarouselTestSlide;

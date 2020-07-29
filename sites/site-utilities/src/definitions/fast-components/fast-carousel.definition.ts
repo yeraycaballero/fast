@@ -30,9 +30,9 @@ export const fastCarouselDefinition: WebComponentDefinition = {
                     required: false,
                 },
                 {
-                    name: "basicpattern",
+                    name: "basic-pattern",
                     description:
-                        "The basicpattern attribute controlling if the caoursle uses the Tabbed or Basic ARIA pattern",
+                        "The basic-pattern attribute controlling if the caoursle uses the Tabbed or Basic ARIA pattern",
                     type: DataType.boolean,
                     default: false,
                     required: false,
@@ -45,7 +45,7 @@ export const fastCarouselDefinition: WebComponentDefinition = {
                     required: false,
                 },
                 {
-                    name: "activeslideid",
+                    name: "active-slide-id",
                     description: "The activeid attribute",
                     type: DataType.string,
                     default: undefined,
@@ -63,6 +63,22 @@ export const fastCarouselDefinition: WebComponentDefinition = {
                     description: "The aria-labelledby attribute",
                     type: DataType.string,
                     default: undefined,
+                    required: false,
+                },
+                {
+                    name: "previous-button-aria-label",
+                    description:
+                        "The aria-label for the default slotted content of previous button",
+                    type: DataType.string,
+                    default: "previous button",
+                    required: false,
+                },
+                {
+                    name: "next-button-aria-label",
+                    description:
+                        "The aria-label for the default slotted content of next button",
+                    type: DataType.string,
+                    default: "next button",
                     required: false,
                 },
             ],

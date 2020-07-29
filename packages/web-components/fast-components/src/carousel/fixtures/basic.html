@@ -3,7 +3,7 @@
     <h1>Carousel Basic</h1>
     <h4>Default</h4>
     <div>
-        <fast-carousel aria-label="test images" basicpattern>
+        <fast-carousel aria-label="test images" basic-pattern>
             <fast-carousel-test-slide>Slide 1</fast-carousel-test-slide>
             <fast-carousel-test-slide even>Slide 2</fast-carousel-test-slide>
             <fast-carousel-test-slide>Slide 3</fast-carousel-test-slide>
@@ -15,7 +15,7 @@
 
     <h4>Paused</h4>
     <div>
-        <fast-carousel aria-label="test images" paused basicpattern>
+        <fast-carousel aria-label="test images" paused basic-pattern>
             <fast-carousel-test-slide>Slide 1</fast-carousel-test-slide>
             <fast-carousel-test-slide even>Slide 2</fast-carousel-test-slide>
             <fast-carousel-test-slide>Slide 3</fast-carousel-test-slide>
@@ -30,9 +30,9 @@
         <fast-carousel
             style="width: 700px;"
             autoplay="false"
-            activeslideid="slide-3"
+            active-slide-id="slide-3"
             aria-label="test images"
-            basicpattern
+            basic-pattern
         >
             <fast-carousel-test-slide>Slide 1</fast-carousel-test-slide>
             <fast-carousel-test-slide even>Slide 2</fast-carousel-test-slide>
@@ -45,7 +45,7 @@
 
     <h4>All Slotted Items</h4>
     <div>
-        <fast-carousel aria-label="test images" basicpattern>
+        <fast-carousel aria-label="test images" basic-pattern>
             <fast-carousel-test-slide>Slide 1</fast-carousel-test-slide>
             <fast-carousel-test-slide even>Slide 2</fast-carousel-test-slide>
             <fast-carousel-test-slide>Slide 3</fast-carousel-test-slide>
@@ -109,7 +109,7 @@
 
     <h4>Slotted Items, Tabbable Content</h4>
     <div>
-        <fast-carousel aria-label="test images" basicpattern>
+        <fast-carousel aria-label="test images" basic-pattern>
             <fast-carousel-test-slide>
                 <button>Slide 1</button>
             </fast-carousel-test-slide>
@@ -163,9 +163,10 @@
     <div>
         <fast-carousel
             style="width: 700px; height: 300px;"
-            basicpattern
             aria-label="test images"
-            basicpattern
+            basic-pattern
+            previous-button-aria-label="test previous slide"
+            next-button-aria-label="test next slide"
         >
             <fast-carousel-test-slide aria-labelledby="slide-one-span-aria-test">
                 <span id="slide-one-span-aria-test">Slide 1</span>
@@ -182,10 +183,10 @@
     <div>
         <fast-carousel
             loop="false"
-            basicpattern
+            basic-pattern
             autoplay="false"
             aria-labelledby="labelledby-test"
-            basicpattern
+            basic-pattern
         >
             <fast-carousel-test-slide>Slide 1</fast-carousel-test-slide>
             <fast-carousel-test-slide even>Slide 2</fast-carousel-test-slide>
@@ -197,7 +198,7 @@
     </div>
     <h4>Default 40 Slides</h4>
     <div>
-        <fast-carousel aria-label="test images" basicpattern>
+        <fast-carousel aria-label="test images" basic-pattern>
             <fast-carousel-test-slide>Slide 1</fast-carousel-test-slide>
             <fast-carousel-test-slide even>Slide 2</fast-carousel-test-slide>
             <fast-carousel-test-slide>Slide 3</fast-carousel-test-slide>

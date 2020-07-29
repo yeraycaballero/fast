@@ -21,7 +21,7 @@ export const CarouselStyles = css`
         display: none;
     }
 
-    :host([basicpattern]) .flipper {
+    :host([basic-pattern]) .flipper {
         opacity: 1;
     }
 

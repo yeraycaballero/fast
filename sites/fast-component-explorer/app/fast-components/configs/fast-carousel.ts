@@ -191,7 +191,7 @@ const fastCarouselConfig: ComponentViewConfig = {
                         schemaId: fastCarouselId,
                         data: {
                             style: "width: 600px; height: 200px",
-                            basicpattern: true,
+                            "basic-pattern": true,
                             Slot: [
                                 {
                                     id: "Slot1",

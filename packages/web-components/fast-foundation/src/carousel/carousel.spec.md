@@ -17,7 +17,7 @@ As defined by the W3C:
 
 - **Next and Previous Controls:** Simple buttons [aka flippers] that allow for control of displaying the next and previous slides.
 
-- **Rotation COntrol:** Simple button controlling the start and stop of automatic slide rotation.
+- **Rotation Control:** Simple button controlling the start and stop of automatic slide rotation.
 
 - **Slide Picker:** A control or group of controls that allows the specific choice of slide to display, labeled as the tab list. The default for this can be generated using the `slotted` and `repeater` directives.
 
@@ -50,8 +50,10 @@ As defined by the W3C:
 - `aria-labelledby` - optional based on implementation**
 - `aria-label` - optional, based on implementation**
 - `paused` - boolean whether the rotation is paused or not
-- `activeslideid` - string
-- `basicpattern` - boolean whether or not the carousel follows the basic or tabbed pattern per ARIA spec, defaults to tabbed when basicpattern is false
+- `active-slide-id` - string
+- `basic-pattern` - boolean whether or not the carousel follows the basic or tabbed pattern per ARIA spec, defaults to tabbed when basic-pattern is false (See the [ARIA Carousel Patterns](https://w3c.github.io/aria-practices/#basic-carousel-elements))
+- `previous-button-aria-label` - string, optional to allow for default slotted content aria-label to be changed
+- `next-button-aria-label` - string, optional to allow for default slotted content aria-label to be changed
 
 ** See the [W3C Specification](https://w3c.github.io/aria-practices/#wai-aria-roles-states-and-properties-4) for requirements and details.
 

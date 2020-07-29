@@ -47,7 +47,7 @@ export class FASTCarousel extends carousel {}
 </fast-carousel>
 
 <h3>Basic</h3>
-<fast-carousel basicpattern autoplayInterval="3000">
+<fast-carousel basic-pattern autoplay-interval="3000">
         <span class="outer-span">
             <span class="inner-span">
                 <slot></slot>
