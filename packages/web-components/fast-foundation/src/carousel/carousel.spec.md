@@ -50,7 +50,7 @@ As defined by the W3C:
 - `aria-labelledby` - optional based on implementation**
 - `aria-label` - optional, based on implementation**
 - `paused` - boolean whether the rotation is paused or not
-- `active-slide-id` - string
+- `active-slide-id` / `activeid` - string, active id of slide or tab depending on pattern
 - `basic-pattern` - boolean whether or not the carousel follows the basic or tabbed pattern per ARIA spec, defaults to tabbed when basic-pattern is false (See the [ARIA Carousel Patterns](https://w3c.github.io/aria-practices/#basic-carousel-elements))
 - `previous-button-aria-label` - string, optional to allow for default slotted content aria-label to be changed
 - `next-button-aria-label` - string, optional to allow for default slotted content aria-label to be changed

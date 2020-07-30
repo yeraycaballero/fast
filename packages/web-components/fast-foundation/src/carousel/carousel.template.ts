@@ -45,14 +45,14 @@ export const CarouselTemplate = html<Carousel>`
             x.paused
                 ? "start automatic slide rotation"
                 : "stop automatic slide rotation"}"
-        ${ref("rotationControl")}
+        ${ref("rotationControlContainer")}
     >
         <slot
             name="rotation-control"
             part="rotation-control"
             ${slotted("rotationControlItem")}
         >
-            <fast-button appearance="neutral">
+            <fast-button appearance="neutral" ${ref("rotationControlDefault")}>
                 ${x =>
                     x.paused
                         ? html`

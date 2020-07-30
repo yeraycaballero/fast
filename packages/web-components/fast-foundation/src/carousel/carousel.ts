@@ -103,7 +103,8 @@ export class Carousel extends Tabs {
     public previousFlipperSlottedItem: HTMLElement[];
     public nextFlipperDefault: HTMLElement;
     public nextFlipperSlottedItem: HTMLElement[];
-    public rotationControl: HTMLElement;
+    public rotationControlDefault: HTMLElement;
+    public rotationControlContainer: HTMLElement;
     public rotationControlItem: HTMLElement[];
     public tablistRef: HTMLElement;
     public tabPanelsContainerRef: HTMLElement;
@@ -274,9 +275,7 @@ export class Carousel extends Tabs {
     }
 
     private handleRotationMouseDown = (e: Event): void => {
-        if (this.firstFocus) {
-            this.firstFocus = false;
-        }
+        this.firstFocus = false;
         this.togglePlay();
     };
 
@@ -343,18 +342,21 @@ export class Carousel extends Tabs {
 
     private handleTabsFocusIn = (e: FocusEvent): void => {
         this.focused = true;
-        e.stopPropagation();
         if (this.firstFocus) {
             this.paused = true;
         }
         this.firstFocus = false;
+        e.stopPropagation();
     };
 
     private handleTabsFocusOut = (e: FocusEvent): void => {
         // sethdonohue - if we focus out of tabs or any tabs children we need to ensure tabs doesn't steal focus
         this.focused = false;
         // sethdonohue - if we focus outside of the carousel then first focus needs to be reset
-        if (!this.contains(e.relatedTarget as Node)) {
+        if (
+            !this.contains(e.relatedTarget as Node) &&
+            (e.relatedTarget as HTMLElement) !== this.rotationControlDefault
+        ) {
             this.firstFocus = true;
         }
     };
@@ -376,8 +378,22 @@ export class Carousel extends Tabs {
         this.addEventListener("blur", this.handleBlur);
 
         // sethdonohue - using mousedown as this fires before focusin so we can account for the first click on the rotation control and the focus immediately following click. This also requires the use of keydown since click is not used
-        this.rotationControl.addEventListener("mousedown", this.handleRotationMouseDown);
-        this.rotationControl.addEventListener("keydown", this.handleRotationKeyDown);
+        this.rotationControlContainer.addEventListener(
+            "mousedown",
+            this.handleRotationMouseDown
+        );
+        this.rotationControlContainer.addEventListener(
+            "mousedown",
+            this.handleRotationMouseDown
+        );
+        this.rotationControlContainer.addEventListener(
+            "keydown",
+            this.handleRotationKeyDown
+        );
+        this.rotationControlContainer.addEventListener(
+            "keydown",
+            this.handleRotationKeyDown
+        );
 
         if (!this.basicPattern) {
             this.tablistRef.addEventListener("keydown", this.handleTabsKeypress);
