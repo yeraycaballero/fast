@@ -39,11 +39,11 @@ export const CarouselStyles = css`
         z-index: 1;
     }
 
-    .previous-flipper {
+    .previous-flipper-container {
         left: 20px;
     }
 
-    .next-flipper {
+    .next-flipper-container {
         right: 20px;
     }
 
@@ -103,7 +103,7 @@ export const CarouselStyles = css`
             ${neutralFocusBehavior.var};
     }
 
-    .rotation-control {
+    .rotation-control-container {
         position: absolute;
         left: 10px;
         top: 10px;

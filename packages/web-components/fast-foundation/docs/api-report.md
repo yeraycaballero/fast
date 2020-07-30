@@ -183,74 +183,60 @@ export const CardTemplate: import("@microsoft/fast-element").ViewTemplate<Card, 
 
 // @public
 export class Carousel extends Tabs {
-    // (undocumented)
+    // @internal (undocumented)
     activeindicator: boolean;
-    // (undocumented)
     activeSlideId: string;
-    // (undocumented)
-    activeSlideIdChanged(): void;
-    // (undocumented)
+    // @internal (undocumented)
     activeSlideIndex: number;
-    // (undocumented)
+    // @internal (undocumented)
     adjust(adjustment: number): void;
-    // (undocumented)
     arialabel: string;
-    // (undocumented)
     arialabelledby: string;
-    // (undocumented)
     autoplay: boolean;
-    // (undocumented)
     autoplayInterval: number;
-    // (undocumented)
+    // @internal (undocumented)
     basicContent: HTMLDivElement;
-    // (undocumented)
     basicPattern: boolean;
-    // (undocumented)
+    // @internal (undocumented)
     change: () => void;
-    // (undocumented)
+    // @internal (undocumented)
     connectedCallback(): void;
-    // (undocumented)
+    // @internal (undocumented)
     disconnectedCallback(): void;
-    // (undocumented)
+    // @internal (undocumented)
     focused: boolean;
-    // (undocumented)
-    focusedChanged(): void;
     // (undocumented)
     handleDefaultFlipperKeypress: (direction: 1 | -1, e: KeyboardEvent) => void;
     // (undocumented)
     handleFlipperClick(direction: 1 | -1, e: Event): void;
     // (undocumented)
     handleFlipperKeypress: (direction: 1 | -1, e: KeyboardEvent) => void;
-    // (undocumented)
+    // @internal (undocumented)
     items: HTMLElement[];
-    // (undocumented)
-    itemsChanged(): void;
-    // (undocumented)
     loop: boolean;
-    // (undocumented)
+    nextButtonAriaLabel: string;
+    // @internal (undocumented)
     nextFlipperDefault: HTMLElement;
-    // (undocumented)
+    // @internal (undocumented)
     nextFlipperSlottedItem: HTMLElement[];
     notabfocus: boolean;
-    // (undocumented)
-    nottabfocusChanged(): void;
-    // (undocumented)
     paused: boolean;
-    // (undocumented)
-    pausedChanged(): void;
-    // (undocumented)
+    previousButtonAriaLabel: string;
+    // @internal (undocumented)
     previousFlipperDefault: HTMLElement;
-    // (undocumented)
+    // @internal (undocumented)
     previousFlipperSlottedItem: HTMLElement[];
-    // (undocumented)
-    rotationControl: HTMLElement;
-    // (undocumented)
+    // @internal (undocumented)
+    rotationControlContainer: HTMLElement;
+    // @internal (undocumented)
+    rotationControlDefault: HTMLElement;
+    // @internal (undocumented)
     rotationControlItem: HTMLElement[];
-    // (undocumented)
+    // @internal (undocumented)
     setComponent(): void;
-    // (undocumented)
+    // @internal (undocumented)
     tablistRef: HTMLElement;
-    // (undocumented)
+    // @internal (undocumented)
     tabPanelsContainerRef: HTMLElement;
     }
 
@@ -261,6 +247,8 @@ export interface Carousel extends ARIAGlobalStatesAndProperties {
 // @public
 export const CarouselTemplate: ViewTemplate<Carousel, any>;
 
+// Warning: (ae-incompatible-release-tags) The symbol "Checkbox" is marked as @public, but its signature references "FormAssociated" which is marked as @alpha
+//
 // @public
 export class Checkbox extends FormAssociated<HTMLInputElement> {
     constructor();

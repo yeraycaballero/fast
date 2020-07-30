@@ -17,15 +17,36 @@ import { ARIAGlobalStatesAndProperties } from "../patterns";
  * @public
  */
 export class Carousel extends Tabs {
+    /**
+     * Determines if the element should start rotation or not on page load.
+     * @public
+     * @defaultValue - true
+     * @remarks
+     * HTML Attribute: autoplay
+     */
     @attr({ mode: "fromView" })
     public autoplay: boolean = true;
 
+    /**
+     * Determines if the element should loop slides or not.
+     * @public
+     * @defaultValue - true
+     * @remarks
+     * HTML Attribute: loop
+     */
     @attr({ mode: "fromView" })
     public loop: boolean = true;
 
+    /**
+     * The state of the slides rotating or not.
+     * @public
+     * @defaultValue - false
+     * @remarks
+     * HTML Attribute: paused
+     */
     @attr({ mode: "boolean" })
     public paused: boolean = false;
-    public pausedChanged(): void {
+    private pausedChanged(): void {
         if (!this.paused) {
             this.focused = false;
             this.notabfocus = true;
@@ -39,49 +60,101 @@ export class Carousel extends Tabs {
         }
     }
 
+    /**
+     * Determines if the pattern being used is the basic or tabbed pattern per ARIA spec. Tabbed pattern is the default used.
+     * See {@link https://w3c.github.io/aria-practices/#wai-aria-roles-states-and-properties-4} for more details.
+     * @public
+     * @defaultValue - false
+     * @remarks
+     * HTML Attribute: basic-pattern
+     */
     @attr({ attribute: "basic-pattern", mode: "boolean" })
     public basicPattern: boolean = false;
 
+    /**
+     * Determines the interval for autoplay in miliseconds.
+     * @public
+     * @defaultValue - 6000
+     * @remarks
+     * HTML Attribute: autoplay-interval
+     */
     @attr({ attribute: "autoplay-interval" })
     public autoplayInterval: number = 6000;
 
+    /**
+     * The id of the active slide.
+     * @public
+     * @remarks
+     * HTML Attribute: active-slide-id
+     */
     @attr({ attribute: "active-slide-id" })
     public activeSlideId: string;
-    public activeSlideIdChanged(): void {
+    private activeSlideIdChanged(): void {
         this.activeSlideIndex = this.slideIds.indexOf(this.activeSlideId);
     }
 
+    /**
+     * The id of the element labeling the carousel.
+     * @public
+     * @remarks
+     * HTML Attribute: aria-labelledby
+     */
     @attr({ attribute: "aria-labelledby" })
     public arialabelledby: string;
 
+    /**
+     * The label surfaced to assistive technologies.
+     *
+     * @public
+     * @remarks
+     * HTML Attribute: aria-label
+     */
     @attr({ attribute: "aria-label" })
     public arialabel: string;
 
+    /**
+     * The aria-label to be passed to the next button
+     *
+     * @public
+     * @defaultValue - next slide
+     * @remarks
+     * HTML Attribute: next-button-aria-label
+     */
     @attr({ attribute: "next-button-aria-label", mode: "fromView" })
     public nextButtonAriaLabel: string = "next slide";
 
+    /**
+     * The aria-label to be passed to the previous button
+     *
+     * @public
+     * @defaultValue - previous slide
+     * @remarks
+     * HTML Attribute: previous-button-aria-label
+     */
     @attr({ attribute: "previous-button-aria-label", mode: "fromView" })
     public previousButtonAriaLabel: string = "previous slide;";
-
-    @observable
-    public focused: boolean = false;
-    public focusedChanged() {
-        if (this.focused) {
-            this.notabfocus = false;
-        } else {
-            this.notabfocus = true;
-        }
-    }
 
     /**
      * Whether or not to focus the tab on change
      * @public
+     * @remarks
      * HTML Attribute: notabfocus
      */
     @observable
     public notabfocus: boolean = true;
-    public nottabfocusChanged(): void {}
 
+    /**
+     * @internal
+     */
+    @observable
+    public focused: boolean = false;
+    private focusedChanged() {
+        this.notabfocus = !this.focused;
+    }
+
+    /**
+     * @internal
+     */
     public setComponent(): void {
         this.activeid = this.tabIds[this.activeTabIndex] as string;
         this.change();
@@ -94,28 +167,76 @@ export class Carousel extends Tabs {
         this.change();
     }
 
+    /**
+     * @internal
+     */
     public activeindicator = false;
 
+    /**
+     * @internal
+     */
     @observable
     public activeSlideIndex: number = 0;
+
+    /**
+     * @internal
+     */
     public basicContent: HTMLDivElement;
+    /**
+     * @internal
+     */
     public previousFlipperDefault: HTMLElement;
+
+    /**
+     * @internal
+     */
     public previousFlipperSlottedItem: HTMLElement[];
+
+    /**
+     * @internal
+     */
     public nextFlipperDefault: HTMLElement;
+
+    /**
+     * @internal
+     */
     public nextFlipperSlottedItem: HTMLElement[];
+
+    /**
+     * @internal
+     */
     public rotationControlDefault: HTMLElement;
+
+    /**
+     * @internal
+     */
     public rotationControlContainer: HTMLElement;
+
+    /**
+     * @internal
+     */
     public rotationControlItem: HTMLElement[];
+
+    /**
+     * @internal
+     */
     public tablistRef: HTMLElement;
+
+    /**
+     * @internal
+     */
     public tabPanelsContainerRef: HTMLElement;
 
+    /**
+     * @internal
+     */
     @observable
     public items: HTMLElement[];
-    public itemsChanged(): void {
+    private itemsChanged(): void {
         if (this.items.length && this.basicPattern) {
             this.generateSlideIds();
 
-            //sethdonohue - if activeSlideId attribute was set by implementation then we need to sync the activeSlideIndex for incrementing to work
+            // if activeSlideId attribute was set by implementation then we need to sync the activeSlideIndex for incrementing to work
             if (this.activeSlideId) {
                 this.activeSlideIndex = this.slideIds.indexOf(this.activeSlideId);
             } else {
@@ -139,15 +260,12 @@ export class Carousel extends Tabs {
                     );
                 }
 
-                item.setAttribute(
-                    "id",
-                    item.getAttribute("id")
-                        ? (item.getAttribute("id") as string)
-                        : `slide-${index + 1}`
-                );
+                if (!item.getAttribute("id")) {
+                    item.setAttribute("id", `slide-${index + 1}`);
+                }
 
                 item.classList.add("slide");
-                // sethdonohue - per ARIA spec role=group and roledescription=slide must be on the slide container for basicPattern (not tabbed) implementation
+                // per ARIA spec role=group and roledescription=slide must be on the slide container for basicPattern (not tabbed) implementation
                 item.setAttribute("role", "group");
                 item.setAttribute("aria-roledescription", "slide");
 
@@ -185,11 +303,17 @@ export class Carousel extends Tabs {
         }
     };
 
+    /**
+     * @internal
+     */
     public change = (): void => {
-        // sethdonohue - reference to carousel is passed for the author to get access to the paused, activeSlideId, and other states.
+        // reference to carousel is passed for the author to get access to the paused, activeSlideId, and other states.
         this.$emit("change", this);
     };
 
+    /**
+     * @internal
+     */
     public adjust(adjustment: number): void {
         this.prevActiveTabIndex = this.activeTabIndex;
         if (this.loop) {
@@ -279,7 +403,7 @@ export class Carousel extends Tabs {
         this.togglePlay();
     };
 
-    private handleRotationKeyDown = (e: KeyboardEvent) => {
+    public handleRotationKeyDown = (e: KeyboardEvent) => {
         switch (e.keyCode) {
             case keyCodeEnter:
             case keyCodeSpace:
@@ -289,8 +413,12 @@ export class Carousel extends Tabs {
     };
 
     private handleFocusIn = (e: FocusEvent): void => {
-        // sethdonohue - per ARIA spec we need to stop rotation whenever keyboard focus is brought to the carousel unless the user specifically requests it to start again
-        // sethdonohue - if firstFocus is true then we are focusing in with the keyboard and not the mousedown fired off of the rotation control so we can still pause. This prevents toggle being fired twice if the rotation control click event is also the first focus event on the carousel
+        // per ARIA spec we need to stop rotation whenever keyboard focus is brought to the carousel,
+        // unless the user specifically requests it to start again.
+        // If firstFocus is true then we are focusing in with the keyboard
+        // and not the mousedown fired off of the rotation control so we can still pause.
+        // This prevents toggle being fired twice if the rotation control click event is also
+        // the first focus event on the carousel
         if (this.firstFocus) {
             if (this.autoplay) {
                 this.paused = true;
@@ -298,10 +426,6 @@ export class Carousel extends Tabs {
             this.firstFocus = false;
         }
     };
-
-    private handleBlur(e: Event): void {
-        this.focused = false;
-    }
 
     private handleMouseOver = () => {
         if (!this.paused) {
@@ -313,7 +437,7 @@ export class Carousel extends Tabs {
 
     private handleMouseLeave = () => {
         if (!this.paused) {
-            // sethdonohue - timer for proper pause of rotation
+            // timer for proper pause of rotation
             const timeDiff: number =
                 this.autoplayInterval - (this.stopTime - this.startTime);
             if (timeDiff) {
@@ -328,8 +452,9 @@ export class Carousel extends Tabs {
         this.focused = false;
     };
 
-    private handleTabsKeypress = (e: KeyboardEvent): void => {
-        // sethdonohue - pause the carousel if the right, left, home, end keys are pressed in the case of when autoplay has been restarted by the user and the focus is on the tabs
+    public handleTabsKeypress = (e: KeyboardEvent): void => {
+        // pause the carousel if the right, left, home, end keys are pressed in the case
+        // of when autoplay has been restarted by the user and the focus is on the tabs
         switch (e.keyCode) {
             case KeyCodes.arrowLeft:
             case KeyCodes.arrowRight:
@@ -350,9 +475,9 @@ export class Carousel extends Tabs {
     };
 
     private handleTabsFocusOut = (e: FocusEvent): void => {
-        // sethdonohue - if we focus out of tabs or any tabs children we need to ensure tabs doesn't steal focus
+        // if we focus out of tabs or any tabs children we need to ensure tabs doesn't steal focus
         this.focused = false;
-        // sethdonohue - if we focus outside of the carousel then first focus needs to be reset
+        // if we focus outside of the carousel then first focus needs to be reset
         if (
             !this.contains(e.relatedTarget as Node) &&
             (e.relatedTarget as HTMLElement) !== this.rotationControlDefault
@@ -361,6 +486,9 @@ export class Carousel extends Tabs {
         }
     };
 
+    /**
+     * @internal
+     */
     public connectedCallback(): void {
         super.connectedCallback();
         if (this.autoplay) {
@@ -369,34 +497,23 @@ export class Carousel extends Tabs {
             this.paused = true;
         }
 
-        // sethdonohue - per ARIA autoplay must pause when mouse is hovering over the carousel
+        // per ARIA autoplay must pause when mouse is hovering over the carousel
         this.addEventListener("mouseover", this.handleMouseOver);
         this.addEventListener("mouseleave", this.handleMouseLeave);
 
-        // sethdonohue - per ARIA rotating must stop when keyboard focus enters the carousel and not restart unless the user explicitly requests it to.
+        // per ARIA rotation must stop when keyboard focus enters the carousel
+        // and not restart unless the user explicitly requests it to.
         this.addEventListener("focusin", this.handleFocusIn);
-        this.addEventListener("blur", this.handleBlur);
 
-        // sethdonohue - using mousedown as this fires before focusin so we can account for the first click on the rotation control and the focus immediately following click. This also requires the use of keydown since click is not used
+        // using mousedown as this fires before focusin so we can account for the
+        // first click on the rotation control and the focus immediately following click.
+        // This also requires the use of keydown since click is not used
         this.rotationControlContainer.addEventListener(
             "mousedown",
             this.handleRotationMouseDown
-        );
-        this.rotationControlContainer.addEventListener(
-            "mousedown",
-            this.handleRotationMouseDown
-        );
-        this.rotationControlContainer.addEventListener(
-            "keydown",
-            this.handleRotationKeyDown
-        );
-        this.rotationControlContainer.addEventListener(
-            "keydown",
-            this.handleRotationKeyDown
         );
 
         if (!this.basicPattern) {
-            this.tablistRef.addEventListener("keydown", this.handleTabsKeypress);
             this.tablistRef.addEventListener("focusin", this.handleTabsFocusIn);
             this.tablistRef.addEventListener("focusout", this.handleTabsFocusOut);
 
@@ -410,7 +527,7 @@ export class Carousel extends Tabs {
                 this.previousFlipperSlottedItem.length &&
                 this.nextFlipperSlottedItem.length
             ) {
-                // sethdonohue - when tabbed the next and previous buttons should not be in the tab sequence
+                // when tabbed the next and previous buttons should not be in the tab sequence
                 DOM.queueUpdate(() => {
                     this.previousFlipperSlottedItem[0].setAttribute("tabindex", "-1");
                     this.nextFlipperSlottedItem[0].setAttribute("tabindex", "-1");
@@ -422,6 +539,9 @@ export class Carousel extends Tabs {
         }
     }
 
+    /**
+     * @internal
+     */
     public disconnectedCallback(): void {
         super.disconnectedCallback();
         this.stopAutoPlay();

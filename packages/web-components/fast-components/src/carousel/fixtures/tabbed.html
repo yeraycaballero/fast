@@ -1,5 +1,18 @@
 <fast-design-system-provider use-defaults>
-    <style></style>
+    <style>
+        .myCarouselStyled::part(rotation-control-container) {
+            left: 50px;
+            top: 50px;
+        }
+
+        .myCarouselStyled::part(previous-button-container) {
+            bottom: 50px;
+        }
+
+        .myCarouselStyled::part(next-button-container) {
+            bottom: 50px;
+        }
+    </style>
     <h1>Carousel Tabbed</h1>
     <h4>Default Tabbed</h4>
     <div>
@@ -96,9 +109,9 @@
         </fast-carousel>
     </div>
 
-    <h4>All Slotted Items</h4>
+    <h4>All Slotted Items And Styled Containers</h4>
     <div>
-        <fast-carousel aria-label="test images">
+        <fast-carousel aria-label="test images" class="myCarouselStyled">
             <fast-tab></fast-tab>
             <fast-tab></fast-tab>
             <fast-tab></fast-tab>

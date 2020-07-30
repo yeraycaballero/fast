@@ -21,7 +21,13 @@ const basicTemplate: ViewTemplate = html<Carousel>`
 
 const tabbedTemplate: ViewTemplate = html<Carousel>`
     <div class="carousel-content">
-        <div class="tablist" part="tablist" role="tablist" ${ref("tablistRef")}>
+        <div
+            class="tablist"
+            part="tablist"
+            role="tablist"
+            @keypress=${(x, c) => x.handleTabsKeypress(c.event as KeyboardEvent)}
+            ${ref("tablistRef")}
+        >
             <slot class="tab" name="tab" part="tab" ${slotted("tabs")}></slot>
         </div>
         <div class="tabpanel" ${ref("tabPanelsContainerRef")}>
@@ -40,11 +46,13 @@ export const CarouselTemplate = html<Carousel>`
     aria-roledescription="carousel"
 >
     <div
-        class="rotation-control"
+        class="rotation-control-container"
+        part="rotation-control-container"
         aria-label="${x =>
             x.paused
                 ? "start automatic slide rotation"
                 : "stop automatic slide rotation"}"
+        @keypress=${(x, c) => x.handleRotationKeyDown(c.event as KeyboardEvent)}
         ${ref("rotationControlContainer")}
     >
         <slot
@@ -65,7 +73,8 @@ export const CarouselTemplate = html<Carousel>`
         </slot>
     </div>
     <div 
-        class="previous-flipper flipper"
+        class="previous-flipper-container flipper"
+        part="previous-button-container"
         @click=${(x, c) => x.handleFlipperClick(-1, c.event as MouseEvent)}
         @keypress=${(x, c) => x.handleFlipperKeypress(-1, c.event as KeyboardEvent)}
     >
@@ -80,7 +89,8 @@ export const CarouselTemplate = html<Carousel>`
         </slot>
     </div>
     <div
-        class="next-flipper flipper"
+        class="next-flipper-container flipper"
+        part="next-button-container"
         @click=${(x, c) => x.handleFlipperClick(1, c.event as MouseEvent)}
         @keypress=${(x, c) => x.handleFlipperKeypress(1, c.event as KeyboardEvent)}
     >
