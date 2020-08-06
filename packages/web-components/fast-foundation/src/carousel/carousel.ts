@@ -29,27 +29,27 @@ export class Carousel extends Tabs {
     /**
      * Determines if the element should start rotation or not on page load.
      * @public
-     * @defaultValue - true
+     * @defaultValue true
      * @remarks
      * HTML Attribute: autoplay
      */
-    @attr({ mode: "fromView" })
+    @attr({ mode: "boolean" })
     public autoplay: boolean = true;
 
     /**
      * Determines if the element should loop slides or not.
      * @public
-     * @defaultValue - true
+     * @defaultValue true
      * @remarks
      * HTML Attribute: loop
      */
-    @attr({ mode: "fromView" })
+    @attr({ mode: "boolean" })
     public loop: boolean = true;
 
     /**
      * The state of the slides rotating or not.
      * @public
-     * @defaultValue - false
+     * @defaultValue false
      * @remarks
      * HTML Attribute: paused
      */
@@ -73,7 +73,7 @@ export class Carousel extends Tabs {
      * Determines the pattern being used, basic or tabbed pattern per ARIA spec. Tabbed pattern is the default used.
      * See {@link https://w3c.github.io/aria-practices/#wai-aria-roles-states-and-properties-4 | ARIA Carousel Patterns} for more details.
      * @public
-     * @defaultValue - tabbed
+     * @defaultValue tabbed
      * @remarks
      * HTML Attribute: pattern
      */
@@ -83,7 +83,7 @@ export class Carousel extends Tabs {
     /**
      * Determines the interval for autoplay in miliseconds.
      * @public
-     * @defaultValue - 6000
+     * @defaultValue 6000
      * @remarks
      * HTML Attribute: autoplay-interval
      */
@@ -125,7 +125,7 @@ export class Carousel extends Tabs {
      * The aria-label to be passed to the next button
      *
      * @public
-     * @defaultValue - next slide
+     * @defaultValue next slide
      * @remarks
      * HTML Attribute: next-button-aria-label
      */
@@ -136,12 +136,12 @@ export class Carousel extends Tabs {
      * The aria-label to be passed to the previous button
      *
      * @public
-     * @defaultValue - previous slide
+     * @defaultValue previous slide
      * @remarks
      * HTML Attribute: previous-button-aria-label
      */
     @attr({ attribute: "previous-button-aria-label", mode: "fromView" })
-    public previousButtonAriaLabel: string = "previous slide;";
+    public previousButtonAriaLabel: string = "previous slide";
 
     /**
      * Whether or not to focus the tab on change
@@ -220,11 +220,6 @@ export class Carousel extends Tabs {
      * @internal
      */
     public rotationControlContainer: HTMLElement;
-
-    /**
-     * @internal
-     */
-    public rotationControlItem: HTMLElement[];
 
     /**
      * @internal
@@ -341,6 +336,18 @@ export class Carousel extends Tabs {
         this.setComponent();
     }
 
+    /**
+     * @internal
+     */
+    public handleRotationKeyDown = (e: KeyboardEvent) => {
+        switch (e.keyCode) {
+            case keyCodeEnter:
+            case keyCodeSpace:
+                this.handleRotationMouseDown(e);
+                break;
+        }
+    };
+
     private slideIds: string[] = [];
     private autoplayTimer: number | void;
     private pausedTimeout: number | void;
@@ -412,15 +419,6 @@ export class Carousel extends Tabs {
         this.togglePlay();
     };
 
-    public handleRotationKeyDown = (e: KeyboardEvent) => {
-        switch (e.keyCode) {
-            case keyCodeEnter:
-            case keyCodeSpace:
-                this.handleRotationMouseDown(e);
-                break;
-        }
-    };
-
     private handleFocusIn = (e: FocusEvent): void => {
         // per ARIA spec we need to stop rotation whenever keyboard focus is brought to the carousel,
         // unless the user specifically requests it to start again.
@@ -461,26 +459,12 @@ export class Carousel extends Tabs {
         this.focused = false;
     };
 
-    public handleTabsKeypress = (e: KeyboardEvent): void => {
-        // pause the carousel if the right, left, home, end keys are pressed in the case
-        // of when autoplay has been restarted by the user and the focus is on the tabs
-        switch (e.keyCode) {
-            case KeyCodes.arrowLeft:
-            case KeyCodes.arrowRight:
-            case KeyCodes.home:
-            case KeyCodes.end:
-                this.paused = true;
-                break;
-        }
-    };
-
     private handleTabsFocusIn = (e: FocusEvent): void => {
         this.focused = true;
         if (this.firstFocus) {
             this.paused = true;
         }
         this.firstFocus = false;
-        e.stopPropagation();
     };
 
     private handleTabsFocusOut = (e: FocusEvent): void => {
@@ -492,6 +476,19 @@ export class Carousel extends Tabs {
             (e.relatedTarget as HTMLElement) !== this.rotationControlDefault
         ) {
             this.firstFocus = true;
+        }
+    };
+
+    private handleTabsKeyDown = (e: KeyboardEvent): void => {
+        // pause the carousel if the right, left, home, end keys are pressed in the case
+        // of when autoplay has been restarted by the user and the focus is on the tabs
+        switch (e.keyCode) {
+            case KeyCodes.arrowLeft:
+            case KeyCodes.arrowRight:
+            case KeyCodes.home:
+            case KeyCodes.end:
+                this.paused = true;
+                break;
         }
     };
 
@@ -525,6 +522,7 @@ export class Carousel extends Tabs {
         if (this.pattern === CarouselPattern.tabbed) {
             this.tablistRef.addEventListener("focusin", this.handleTabsFocusIn);
             this.tablistRef.addEventListener("focusout", this.handleTabsFocusOut);
+            this.tablistRef.addEventListener("keydown", this.handleTabsKeyDown);
 
             this.tabPanelsContainerRef.addEventListener("focusin", this.handleMouseOver);
             this.tabPanelsContainerRef.addEventListener(

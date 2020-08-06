@@ -21,13 +21,7 @@ const basicTemplate: ViewTemplate = html<Carousel>`
 
 const tabbedTemplate: ViewTemplate = html<Carousel>`
     <div class="carousel-content">
-        <div
-            class="tablist"
-            part="tablist"
-            role="tablist"
-            @keypress=${(x, c) => x.handleTabsKeypress(c.event as KeyboardEvent)}
-            ${ref("tablistRef")}
-        >
+        <div class="tablist" part="tablist" role="tablist" ${ref("tablistRef")}>
             <slot class="tab" name="tab" part="tab" ${slotted("tabs")}></slot>
         </div>
         <div class="tabpanel" ${ref("tabPanelsContainerRef")}>
@@ -58,7 +52,6 @@ export const CarouselTemplate = html<Carousel>`
         <slot
             name="rotation-control"
             part="rotation-control"
-            ${slotted("rotationControlItem")}
         >
             <fast-button appearance="neutral" ${ref("rotationControlDefault")}>
                 ${x =>
