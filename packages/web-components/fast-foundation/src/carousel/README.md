@@ -2,7 +2,7 @@
 id: fast-carousel
 title: fast-carousel
 sidebar_label: fast-carousel
-custom_edit_url: https://github.com/microsoft/fast-dna/edit/master/packages/web-components/fast-foundation/src/carousel/README.md
+custom_edit_url: https://github.com/microsoft/fast/edit/master/packages/web-components/fast-foundation/src/carousel/README.md
 ---
 A web component implementation of a [carousel](https://w3c.github.io/aria-practices/#carousel).
 Note: To implement the *Tabbed* pattern Carousel `<fast-tab>` and `<fast-tab-panel>` must be used for the pattern to work properly.
@@ -47,14 +47,14 @@ export class FASTCarousel extends carousel {}
 </fast-carousel>
 
 <h3>Basic</h3>
-<fast-carousel basic-pattern autoplay-interval="3000">
-        <span class="outer-span">
-            <span class="inner-span">
-                <slot></slot>
-            </span>
-            <img src="https://placehold.it/1300x600/" alt="Place Holder Image"/>
+<fast-carousel pattern="basic" autoplay-interval="3000">
+    <span class="outer-span">
+        <span class="inner-span">
+            <slot></slot>
         </span>
-        <img src="https://placehold.it/1300x600/3E3E3E/171717" alt="Place Holder Image"/>
         <img src="https://placehold.it/1300x600/" alt="Place Holder Image"/>
+    </span>
+    <img src="https://placehold.it/1300x600/3E3E3E/171717" alt="Place Holder Image"/>
+    <img src="https://placehold.it/1300x600/" alt="Place Holder Image"/>
 </fast-carousel>
 ```

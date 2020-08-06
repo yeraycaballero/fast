@@ -196,7 +196,6 @@ export class Carousel extends Tabs {
     autoplayInterval: number;
     // @internal (undocumented)
     basicContent: HTMLDivElement;
-    basicPattern: boolean;
     // @internal (undocumented)
     change: () => void;
     // @internal (undocumented)
@@ -211,6 +210,10 @@ export class Carousel extends Tabs {
     handleFlipperClick(direction: 1 | -1, e: Event): void;
     // (undocumented)
     handleFlipperKeypress: (direction: 1 | -1, e: KeyboardEvent) => void;
+    // (undocumented)
+    handleRotationKeyDown: (e: KeyboardEvent) => void;
+    // (undocumented)
+    handleTabsKeypress: (e: KeyboardEvent) => void;
     // @internal (undocumented)
     items: HTMLElement[];
     loop: boolean;
@@ -220,6 +223,7 @@ export class Carousel extends Tabs {
     // @internal (undocumented)
     nextFlipperSlottedItem: HTMLElement[];
     notabfocus: boolean;
+    pattern: string;
     paused: boolean;
     previousButtonAriaLabel: string;
     // @internal (undocumented)
@@ -242,6 +246,14 @@ export class Carousel extends Tabs {
 
 // @public (undocumented)
 export interface Carousel extends ARIAGlobalStatesAndProperties {
+}
+
+// @public (undocumented)
+export enum CarouselPattern {
+    // (undocumented)
+    basic = "basic",
+    // (undocumented)
+    tabbed = "tabbed"
 }
 
 // @public

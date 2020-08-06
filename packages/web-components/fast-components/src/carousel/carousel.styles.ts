@@ -1,6 +1,6 @@
 import { css } from "@microsoft/fast-element";
 import { neutralForegroundRestBehavior, neutralFocusBehavior } from "../styles/recipes";
-import { focusVisible, display } from "@microsoft/fast-foundation";
+import { focusVisible, display, CarouselPattern } from "@microsoft/fast-foundation";
 
 export const CarouselStyles = css`
     ${display("inline-flex")} :host {
@@ -21,7 +21,7 @@ export const CarouselStyles = css`
         display: none;
     }
 
-    :host([basic-pattern]) .flipper {
+    :host([pattern=${CarouselPattern.basic}]) .flipper {
         opacity: 1;
     }
 

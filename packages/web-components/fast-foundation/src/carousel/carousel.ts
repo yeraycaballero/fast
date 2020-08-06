@@ -11,6 +11,15 @@ import { applyMixins } from "../utilities";
 import { ARIAGlobalStatesAndProperties } from "../patterns";
 
 /**
+ * The pattern type that the Carousel follows.
+ * See {@link https://w3c.github.io/aria-practices/#wai-aria-roles-states-and-properties-4 | ARIA Carousel Patterns
+ */
+export enum CarouselPattern {
+    basic = "basic",
+    tabbed = "tabbed",
+}
+
+/**
  * An Carousel Custom HTML Element.
  * Implements the {@link https://www.w3.org/TR/wai-aria-1.1/#carousel | ARIA carousel }.
  *
@@ -61,15 +70,15 @@ export class Carousel extends Tabs {
     }
 
     /**
-     * Determines if the pattern being used is the basic or tabbed pattern per ARIA spec. Tabbed pattern is the default used.
-     * See {@link https://w3c.github.io/aria-practices/#wai-aria-roles-states-and-properties-4} for more details.
+     * Determines the pattern being used, basic or tabbed pattern per ARIA spec. Tabbed pattern is the default used.
+     * See {@link https://w3c.github.io/aria-practices/#wai-aria-roles-states-and-properties-4 | ARIA Carousel Patterns} for more details.
      * @public
-     * @defaultValue - false
+     * @defaultValue - tabbed
      * @remarks
-     * HTML Attribute: basic-pattern
+     * HTML Attribute: pattern
      */
-    @attr({ attribute: "basic-pattern", mode: "boolean" })
-    public basicPattern: boolean = false;
+    @attr({ attribute: "pattern" })
+    public pattern: string = CarouselPattern.tabbed;
 
     /**
      * Determines the interval for autoplay in miliseconds.
@@ -233,7 +242,7 @@ export class Carousel extends Tabs {
     @observable
     public items: HTMLElement[];
     private itemsChanged(): void {
-        if (this.items.length && this.basicPattern) {
+        if (this.items.length && this.pattern === CarouselPattern.basic) {
             this.generateSlideIds();
 
             // if activeSlideId attribute was set by implementation then we need to sync the activeSlideIndex for incrementing to work
@@ -265,7 +274,7 @@ export class Carousel extends Tabs {
                 }
 
                 item.classList.add("slide");
-                // per ARIA spec role=group and roledescription=slide must be on the slide container for basicPattern (not tabbed) implementation
+                // per ARIA spec role=group and roledescription=slide must be on the slide container for pattern of basic (not tabbed) implementation
                 item.setAttribute("role", "group");
                 item.setAttribute("aria-roledescription", "slide");
 
@@ -340,16 +349,16 @@ export class Carousel extends Tabs {
     private stopTime: number = 0;
 
     private incrementSlide = (direction: 1 | -1): void => {
-        const tempLength: number = this.basicPattern
-            ? this.items.length
-            : this.tabs.length;
-        const tempIndex: number = this.basicPattern
-            ? this.activeSlideIndex
-            : this.activeTabIndex;
+        const tempLength: number =
+            this.pattern === CarouselPattern.basic ? this.items.length : this.tabs.length;
+        const tempIndex: number =
+            this.pattern === CarouselPattern.basic
+                ? this.activeSlideIndex
+                : this.activeTabIndex;
         this.focused = false;
         let adjustment: number = 0;
 
-        if (this.basicPattern) {
+        if (this.pattern === CarouselPattern.basic) {
             if (this.loop) {
                 adjustment = wrapInBounds(0, tempLength - 1, tempIndex + direction);
             } else {
@@ -513,7 +522,7 @@ export class Carousel extends Tabs {
             this.handleRotationMouseDown
         );
 
-        if (!this.basicPattern) {
+        if (this.pattern === CarouselPattern.tabbed) {
             this.tablistRef.addEventListener("focusin", this.handleTabsFocusIn);
             this.tablistRef.addEventListener("focusout", this.handleTabsFocusOut);
 
