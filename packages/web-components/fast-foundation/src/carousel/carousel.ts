@@ -1,18 +1,19 @@
-import { attr, observable, DOM } from "@microsoft/fast-element";
-import { Tabs } from "../tabs";
+import { attr, DOM, observable } from "@microsoft/fast-element";
 import {
-    keyCodeSpace,
     keyCodeEnter,
-    wrapInBounds,
-    limit,
     KeyCodes,
+    keyCodeSpace,
+    limit,
+    wrapInBounds,
 } from "@microsoft/fast-web-utilities";
+import { Tabs } from "../tabs";
 import { applyMixins } from "../utilities";
 import { ARIAGlobalStatesAndProperties } from "../patterns";
 
 /**
  * The pattern type that the Carousel follows.
- * See {@link https://w3c.github.io/aria-practices/#wai-aria-roles-states-and-properties-4 | ARIA Carousel Patterns
+ * @public
+ * See {@link https://w3c.github.io/aria-practices/#wai-aria-roles-states-and-properties-4 | ARIA Carousel Patterns}.
  */
 export enum CarouselPattern {
     basic = "basic",
@@ -555,5 +556,11 @@ export class Carousel extends Tabs {
     }
 }
 
+/**
+ * Mark internal because exporting class and interface of the same name
+ * confuses API documenter.
+ * TODO: https://github.com/microsoft/fast/issues/3317
+ * @internal
+ */
 export interface Carousel extends ARIAGlobalStatesAndProperties {}
 applyMixins(Carousel, ARIAGlobalStatesAndProperties);
