@@ -11,7 +11,6 @@ import { ElementStyles } from '@microsoft/fast-element';
 import { FASTElement } from '@microsoft/fast-element';
 import { Orientation } from '@microsoft/fast-web-utilities';
 import { PartialFASTElementDefinition } from '@microsoft/fast-element';
-import { ViewTemplate } from '@microsoft/fast-element';
 
 // @public
 export class Accordion extends FASTElement {
@@ -220,77 +219,10 @@ export type CSSDisplayPropertyValue = "block" | "contents" | "flex" | "grid" | "
 // @public
 export class DataGrid extends FASTElement {
     constructor();
-    columnsData: DataGridColumn[] | null;
     // @internal (undocumented)
     connectedCallback(): void;
-    static generateColumns: (row: object) => DataGridColumn[];
-    // (undocumented)
-    generateHeader: boolean;
     rowsData: object[];
-    // @internal (undocumented)
-    slottedHeaderElements: HTMLElement[];
-    // @internal (undocumented)
-    slottedRowElements: HTMLElement[];
-}
-
-// @public
-export class DataGridCell extends FASTElement {
-    // (undocumented)
-    cellConfig: DataGridCellConfig | null;
-    columnData: DataGridColumn | null;
-    // @internal (undocumented)
-    connectedCallback(): void;
-    // @internal (undocumented)
-    disconnectedCallback(): void;
-    gridColumnIndex: number;
-    rowData: object | null;
     }
-
-// @public
-export interface DataGridCellConfig {
-    // (undocumented)
-    columnData: DataGridColumn;
-    // (undocumented)
-    rowData: object;
-}
-
-// @public
-export const DataGridCellTemplate: import("@microsoft/fast-element").ViewTemplate<DataGridCell, any>;
-
-// @public
-export interface DataGridColumn {
-    cellTemplate?: ViewTemplate;
-    columnDataKey: string;
-    columnWidth?: string;
-    headerCellTemplate?: ViewTemplate;
-    title?: string;
-}
-
-// @public
-export class DataGridHeader extends FASTElement {
-    columnData: DataGridColumn[];
-    }
-
-// @public
-export const DataGridHeaderTemplate: import("@microsoft/fast-element").ViewTemplate<DataGridHeader, any>;
-
-// @public
-export class DataGridRow extends FASTElement {
-    // (undocumented)
-    cellElements?: object[];
-    // (undocumented)
-    cellItemTemplate?: ViewTemplate;
-    columnsData: DataGridColumn[] | null;
-    // @internal (undocumented)
-    connectedCallback(): void;
-    gridTemplateColumns: string;
-    rowData: object | null;
-    // @internal (undocumented)
-    slottedCellElements: HTMLElement[];
-    }
-
-// @public
-export const DataGridRowTemplate: import("@microsoft/fast-element").ViewTemplate<DataGridRow, any>;
 
 // @public
 export const DataGridTemplate: import("@microsoft/fast-element").ViewTemplate<DataGrid, any>;

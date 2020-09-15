@@ -4,10 +4,7 @@ import addons from "@storybook/addons";
 import DataGridTemplate from "./fixtures/base.html";
 import { html } from "@microsoft/fast-element";
 import {
-    DataGrid,
-    DataGridCell,
-    DataGridColumn,
-    DataGridRow,
+    DataGrid
 } from "@microsoft/fast-foundation";
 import { FASTDataGrid } from "./";
 
@@ -21,41 +18,15 @@ addons.getChannel().addListener(STORY_RENDERED, (name: string) => {
             "defaultGrid"
         ) as DataGrid;
         if (defaultGrid !== null) {
-            defaultGrid.columnsData = baseColumns;
             defaultGrid.rowsData = dataRows;
         }
-    }
 
-    const defaultGridRow: DataGridRow | null = document.getElementById(
-        "defaultGridRow"
-    ) as DataGridRow;
-    if (defaultGridRow !== null) {
-        defaultGridRow.columnsData = baseColumns;
-        defaultGridRow.rowData = dataGridRow3;
-    }
-
-    const defaultRow: DataGridRow | null = document.getElementById(
-        "defaultRow"
-    ) as DataGridRow;
-    if (defaultRow !== null) {
-        defaultRow.columnsData = baseColumns;
-        defaultRow.rowData = dataGridRow1;
-    }
-
-    const rowWithCellTemplate: DataGridRow | null = document.getElementById(
-        "cellTemplateRow"
-    ) as DataGridRow;
-    if (rowWithCellTemplate !== null) {
-        rowWithCellTemplate.columnsData = templateColumns;
-        rowWithCellTemplate.rowData = dataGridRow1;
-    }
-
-    const defaultCell: DataGridCell | null = document.getElementById(
-        "defaultCell"
-    ) as DataGridCell;
-    if (rowWithCellTemplate !== null) {
-        defaultCell.columnData = { columnDataKey: "name", columnWidth: "1fr" };
-        defaultCell.rowData = dataGridRow1;
+        const incrementButton: HTMLButtonElement | null = document.getElementById(
+            "incrementbtn"
+        ) as HTMLButtonElement;
+        if (incrementButton !== null) {
+            incrementButton.onclick = incrementAge;
+        }
     }
 });
 
@@ -65,65 +36,14 @@ export default {
 
 function incrementAge(): void {
     dataGridRow1["age"] = dataGridRow1["age"] + 1;
-
-    const rowWithCellTemplate: DataGridRow | null = document.getElementById(
-        "cellTemplateRow"
-    ) as DataGridRow;
-    if (rowWithCellTemplate !== null) {
-        rowWithCellTemplate.rowData = { ...dataGridRow1 };
-    }
-
-    dataRows.splice(0,1,{ ...dataGridRow1 });
-
-    // const defaultGrid: DataGrid | null = document.getElementById(
-    //     "defaultGrid"
-    // ) as DataGrid;
-    // if (defaultGrid !== null) {
-    //     defaultGrid.rowsData = dataRows;
-    // }
-
-    // const newRow: object = { ...dataGridRow1 };
-    // newRow["age"] = newRow["age"] + 1;
-    // const rowWithCellTemplate: DataGridRow | null = document.getElementById(
-    //     "cellTemplateRow"
-    // ) as DataGridRow;
-    // if (rowWithCellTemplate !== null) {
-    //     rowWithCellTemplate.rowData = newRow;
-    // }
-    // dataGridRow1 = newRow;
+    dataRows.shift();
+    dataRows.unshift({ ...dataGridRow1 });
 }
-
-const dataGridButtonCellTemplate = html<DataGridCell>`
-    <template>
-        <button @click="${x => incrementAge()}">
-            ${x =>
-                x.rowData === null ||
-                x.columnData === null ||
-                x.columnData.columnDataKey === null
-                    ? null
-                    : x.rowData[x.columnData.columnDataKey]}
-        </button>
-    </template>
-`;
-
-const baseColumns: DataGridColumn[] = [
-    { columnDataKey: "name", columnWidth: "1fr" },
-    { columnDataKey: "age", columnWidth: "1fr" },
-];
-
-const templateColumns: DataGridColumn[] = [
-    { columnDataKey: "name", columnWidth: "1fr" },
-    {
-        columnDataKey: "age",
-        columnWidth: "1fr",
-        cellTemplate: dataGridButtonCellTemplate,
-    },
-];
 
 let dataGridRow1: object = { name: "bob", age: 21 };
 const dataGridRow2: object = { name: "rob", age: 22 };
 const dataGridRow3: object = { name: "bobby", age: 23 };
 
-const dataRows: object[] = [dataGridRow1, dataGridRow2];
+const dataRows: object[] = [dataGridRow1, dataGridRow2, dataGridRow3];
 
 export const base = () => DataGridTemplate;

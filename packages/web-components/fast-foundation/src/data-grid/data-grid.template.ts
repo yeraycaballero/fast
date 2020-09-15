@@ -7,11 +7,7 @@ import { DataGrid } from "./data-grid";
  */
 export const DataGridTemplate = html<DataGrid>`
     <template role="grid">
-        <slot
-            name="headerSlot"
-            part="headerSlot"
-            ${slotted("slottedHeaderElements")}
-        ></slot>
-        <slot part="rowsSlot" ${slotted("slottedRowElements")}></slot>
+      <slot>
+      </slot>
     </template>
 `;

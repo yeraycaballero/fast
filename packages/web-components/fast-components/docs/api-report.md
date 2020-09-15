@@ -14,9 +14,6 @@ import { Card } from '@microsoft/fast-foundation';
 import { Checkbox } from '@microsoft/fast-foundation';
 import { ColorRGBA64 } from '@microsoft/fast-colors';
 import { DataGrid } from '@microsoft/fast-foundation';
-import { DataGridCell } from '@microsoft/fast-foundation';
-import { DataGridHeader } from '@microsoft/fast-foundation';
-import { DataGridRow } from '@microsoft/fast-foundation';
 import { DesignSystemProvider } from '@microsoft/fast-foundation';
 import { Dialog } from '@microsoft/fast-foundation';
 import { Direction } from '@microsoft/fast-web-utilities';
@@ -30,6 +27,7 @@ import { Slider } from '@microsoft/fast-foundation';
 import { SliderLabel } from '@microsoft/fast-foundation';
 import { Switch } from '@microsoft/fast-foundation';
 import { Tab } from '@microsoft/fast-foundation';
+import { TabPanel } from '@microsoft/fast-foundation';
 import { Tabs } from '@microsoft/fast-foundation';
 import { TextArea } from '@microsoft/fast-foundation';
 import { TextField } from '@microsoft/fast-foundation';
@@ -227,15 +225,6 @@ export const CheckboxStyles: import("@microsoft/fast-element").ElementStyles;
 export function createColorPalette(baseColor: any): string[];
 
 // @public
-export const DataGridCellStyles: import("@microsoft/fast-element").ElementStyles;
-
-// @public
-export const DataGridHeaderStyles: import("@microsoft/fast-element").ElementStyles;
-
-// @public
-export const DataGridRowStyles: import("@microsoft/fast-element").ElementStyles;
-
-// @public
 export const DataGridStyles: import("@microsoft/fast-element").ElementStyles;
 
 // @public
@@ -284,18 +273,6 @@ export class FASTCheckbox extends Checkbox {
 
 // @public
 export class FASTDataGrid extends DataGrid {
-}
-
-// @public
-export class FASTDataGridCell extends DataGridCell {
-}
-
-// @public
-export class FASTDataGridHeader extends DataGridHeader {
-}
-
-// @public
-export class FASTDataGridRow extends DataGridRow {
 }
 
 // @public
@@ -536,6 +513,10 @@ export class FASTSwitch extends Switch {
 
 // @public
 export class FASTTab extends Tab {
+}
+
+// @public
+export class FASTTabPanel extends TabPanel {
 }
 
 // @public
@@ -983,6 +964,9 @@ export enum StandardLuminance {
 
 // @public
 export const SwitchStyles: import("@microsoft/fast-element").ElementStyles;
+
+// @public
+export const TabPanelStyles: import("@microsoft/fast-element").ElementStyles;
 
 // @public
 export const TabsStyles: import("@microsoft/fast-element").ElementStyles;
