@@ -19,7 +19,6 @@ declare global {
 
 export type AxisPositioningMode = "uncontrolled" | "locktodefault" | "dynamic";
 export type AxisScalingMode = "anchor" | "fill" | "content";
-export type GbcrUsage = "always" | "never" | "default";
 export type HorizontalPosition = "start" | "end" | "left" | "right" | "unset";
 export type VerticalPosition = "top" | "bottom" | "unset";
 

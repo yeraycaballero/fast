@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { AnchoredRegion, AnchoredRegionTemplate as template } from "./index";
 import { fixture } from "../fixture";
-import { DOM, customElement } from "@microsoft/fast-element";
+import { DOM, customElement, html } from "@microsoft/fast-element";
 
 @customElement({
     name: "fast-anchored-region",
@@ -10,26 +10,81 @@ import { DOM, customElement } from "@microsoft/fast-element";
 class FASTAnchoredRegion extends AnchoredRegion {}
 
 async function setup() {
-    const { element, connect, disconnect } = await fixture<FASTAnchoredRegion>("fast-anchored-region");
 
+    const { element, connect, disconnect } = await fixture(html<HTMLDivElement>`
+                <div id="viewport" style="width: 1000px; height: 1000px;">
+                    <button id="anchor" style="width: 100px; height: 100px;">anchor</button>
+                    <fast-anchored-region
+                        viewport="viewport"
+                        anchor="anchor"
+                        id="region"
+                    >
+                        <div id="contents" style="width: 100px; height: 100px;">
+                    </fast-anchored-region>
+                </div>
+            `);
     return { element, connect, disconnect };
 }
 
 describe("Anchored Region", () => {
-    // it("should set both the background-color and fill on the control as an inline style when `fill` and `color` are provided", async () => {
-    //     const { element, connect, disconnect } = await setup();
-    //     const fill: string = "foo";
-    //     const color: string = "bar";
+    it("should not assign anchor and viewport elements by id", async () => {
+        const { element, connect, disconnect } = await setup();
+        const region: FASTAnchoredRegion = element.querySelector("fast-anchored-region") as FASTAnchoredRegion;
 
-    //     element.fill = fill;
-    //     element.color = color;
+        await connect();
+        await DOM.nextUpdate();
 
-    //     await connect();
+        expect(region.anchorElement?.id).to.equal("anchor");
+        expect(region.viewportElement?.id).to.equal("viewport");
 
-    //     expect(
-    //         element.shadowRoot?.querySelector(".control")?.getAttribute("style")
-    //     ).to.equal(`${expectedColor(color)} ${expectedFill(fill)}`);
+        await disconnect();
+    });
 
-    //     await disconnect();
-    // });
+    it("should be sized to match content by default", async () => {
+        const { element, connect, disconnect } = await setup();
+        const region: FASTAnchoredRegion = element.querySelector("fast-anchored-region") as FASTAnchoredRegion;
+        const contents: HTMLElement = element.querySelector("#contents") as HTMLElement;
+
+        await connect();
+        await DOM.nextUpdate();
+
+        expect(region.clientHeight).to.equal(contents.clientHeight);
+        expect(region.clientWidth).to.equal(contents.clientWidth);
+
+        await disconnect();
+    });
+
+    it("should be sized to match anchor when specified by scaling mode", async () => {
+        const { element, connect, disconnect } = await setup();
+        const region: FASTAnchoredRegion = element.querySelector("fast-anchored-region") as FASTAnchoredRegion;
+        const anchor: HTMLElement = element.querySelector("#anchor") as HTMLElement;
+
+        region.horizontalScaling="anchor";
+        region.verticalScaling="anchor";
+
+        await connect();
+        await DOM.nextUpdate();
+
+        expect(region.clientHeight).to.equal(anchor.clientHeight);
+        expect(region.clientHeight).to.equal(anchor.clientHeight);
+        expect(region.clientWidth).to.equal(anchor.clientWidth);
+
+        await disconnect();
+    });
+
+    it("should be sized to match available space when specified by scaling mode", async () => {
+        const { element, connect, disconnect } = await setup();
+        const region: FASTAnchoredRegion = element.querySelector("fast-anchored-region") as FASTAnchoredRegion;
+
+        region.horizontalScaling="fill";
+        region.verticalScaling="fill";
+
+        await connect();
+        await DOM.nextUpdate();
+
+        expect(region.clientHeight).to.equal(element.clientHeight);
+        expect(region.clientWidth).to.equal(element.clientWidth);
+
+        await disconnect();
+    });
 });
