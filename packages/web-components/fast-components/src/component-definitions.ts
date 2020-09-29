@@ -1,6 +1,7 @@
 export * from "./accordion/accordion-item.definition";
 export * from "./accordion/accordion.definition";
 export * from "./anchor/anchor.definition";
+export * from "./avatar/avatar.definition";
 export * from "./badge/badge.definition";
 export * from "./button/button.definition";
 export * from "./card/card.definition";

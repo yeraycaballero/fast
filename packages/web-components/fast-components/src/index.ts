@@ -1,5 +1,6 @@
 export * from "./accordion/index";
 export * from "./anchor/index";
+export * from "./avatar/index";
 export * from "./badge/index";
 export * from "./button/index";
 export * from "./card/index";

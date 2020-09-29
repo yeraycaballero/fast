@@ -20,6 +20,7 @@ module.exports = {
                     items: [
                         "components/accordion",
                         "components/anchor",
+                        "components/avatar",
                         "components/badge",
                         "components/button",
                         "components/card",
