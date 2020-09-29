@@ -192,6 +192,7 @@ export class Carousel extends Tabs {
      * @internal
      */
     public basicContent: HTMLDivElement;
+
     /**
      * @internal
      */
@@ -562,5 +563,6 @@ export class Carousel extends Tabs {
  * TODO: https://github.com/microsoft/fast/issues/3317
  * @internal
  */
+/* eslint-disable-next-line @typescript-eslint/no-empty-interface */
 export interface Carousel extends ARIAGlobalStatesAndProperties {}
 applyMixins(Carousel, ARIAGlobalStatesAndProperties);

@@ -1,6 +1,31 @@
 import { css } from "@microsoft/fast-element";
 import { neutralForegroundRestBehavior, neutralFocusBehavior } from "../styles/recipes";
-import { focusVisible, display, CarouselPattern } from "@microsoft/fast-foundation";
+import {
+    focusVisible,
+    display,
+    CarouselPattern,
+    DirectionalStyleSheetBehavior,
+} from "@microsoft/fast-foundation";
+
+const ltr = css`
+    .previous-flipper-container {
+        left: 20px;
+    }
+
+    .next-flipper-container {
+        right: 20px;
+    }
+`;
+
+const rtl = css`
+    .previous-flipper-container {
+        right: 20px;
+    }
+
+    .next-flipper-container {
+        left: 20px;
+    }
+`;
 
 export const CarouselStyles = css`
     ${display("inline-flex")} :host {
@@ -21,7 +46,7 @@ export const CarouselStyles = css`
         display: none;
     }
 
-    :host([pattern=${CarouselPattern.basic}]) .flipper {
+    :host([pattern="${CarouselPattern.basic}"]) .flipper {
         opacity: 1;
     }
 
@@ -37,14 +62,6 @@ export const CarouselStyles = css`
         transition: all 0.2s ease-in-out;
         position: absolute;
         z-index: 1;
-    }
-
-    .previous-flipper-container {
-        left: 20px;
-    }
-
-    .next-flipper-container {
-        right: 20px;
     }
 
     .tablist {
@@ -109,4 +126,8 @@ export const CarouselStyles = css`
         top: 10px;
         z-index: 1;
     }
-`.withBehaviors(neutralForegroundRestBehavior, neutralFocusBehavior);
+`.withBehaviors(
+    new DirectionalStyleSheetBehavior(ltr, rtl),
+    neutralForegroundRestBehavior,
+    neutralFocusBehavior
+);

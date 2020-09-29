@@ -49,6 +49,6 @@ export class Flipper extends FASTElement {
  * TODO: https://github.com/microsoft/fast/issues/3317
  * @internal
  */
-/* eslint-disable-next-line */
+/* eslint-disable-next-line @typescript-eslint/no-empty-interface */
 export interface Flipper extends ARIAGlobalStatesAndProperties {}
 applyMixins(Flipper, ARIAGlobalStatesAndProperties);
