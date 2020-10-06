@@ -132,7 +132,7 @@ const fastCarouselConfig: ComponentViewConfig = {
                         },
                         schemaId: "img",
                         data: {
-                            src: "https://placehold.it/500x250/",
+                            src: "https://placehold.it/500x250?text=TabPanel1",
                         },
                     },
                     Slot4: {
@@ -154,8 +154,10 @@ const fastCarouselConfig: ComponentViewConfig = {
                             id: "Slot4",
                             dataLocation: "Slot",
                         },
-                        schemaId: textSchema.id,
-                        data: "Tab panel 2",
+                        schemaId: "img",
+                        data: {
+                            src: "https://placehold.it/500x250?text=TabPanel2",
+                        },
                     },
                     Slot5: {
                         parent: {
@@ -176,8 +178,10 @@ const fastCarouselConfig: ComponentViewConfig = {
                             id: "Slot5",
                             dataLocation: "Slot",
                         },
-                        schemaId: textSchema.id,
-                        data: "Tab panel 3",
+                        schemaId: "img",
+                        data: {
+                            src: "https://placehold.it/500x250?text=TabPanel3",
+                        },
                     },
                 },
                 "root",
@@ -212,7 +216,8 @@ const fastCarouselConfig: ComponentViewConfig = {
                         },
                         schemaId: "img",
                         data: {
-                            src: "https://placehold.it/500x250/3E3E3E/171717",
+                            src:
+                                "https://placehold.it/500x250/3E3E3E/171717?text=TabPanel1",
                         },
                     },
                     Slot2: {
@@ -222,7 +227,7 @@ const fastCarouselConfig: ComponentViewConfig = {
                         },
                         schemaId: "img",
                         data: {
-                            src: "https://placehold.it/500x250/",
+                            src: "https://placehold.it/500x250?text=TabPanel2",
                         },
                     },
                     Slot3: {
@@ -232,7 +237,8 @@ const fastCarouselConfig: ComponentViewConfig = {
                         },
                         schemaId: "img",
                         data: {
-                            src: "https://placehold.it/500x250/3E3E3E/171717",
+                            src:
+                                "https://placehold.it/500x250/3E3E3E/171717?text=TabPanel3",
                         },
                     },
                 },

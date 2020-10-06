@@ -12,7 +12,6 @@ import { BaseProgress } from '@microsoft/fast-foundation';
 import { Button } from '@microsoft/fast-foundation';
 import { Card } from '@microsoft/fast-foundation';
 import { Carousel } from '@microsoft/fast-foundation';
-import { CarouselTestSlide } from '@microsoft/fast-foundation';
 import { Checkbox } from '@microsoft/fast-foundation';
 import { ColorRGBA64 } from '@microsoft/fast-colors';
 import { DesignSystemProvider } from '@microsoft/fast-foundation';
@@ -24,6 +23,7 @@ import { Menu } from '@microsoft/fast-foundation';
 import { MenuItem } from '@microsoft/fast-foundation';
 import { Radio } from '@microsoft/fast-foundation';
 import { RadioGroup } from '@microsoft/fast-foundation';
+import { Skeleton } from '@microsoft/fast-foundation';
 import { Slider } from '@microsoft/fast-foundation';
 import { SliderLabel } from '@microsoft/fast-foundation';
 import { Switch } from '@microsoft/fast-foundation';
@@ -32,6 +32,7 @@ import { TabPanel } from '@microsoft/fast-foundation';
 import { Tabs } from '@microsoft/fast-foundation';
 import { TextArea } from '@microsoft/fast-foundation';
 import { TextField } from '@microsoft/fast-foundation';
+import { Tooltip } from '@microsoft/fast-foundation';
 import { TreeItem } from '@microsoft/fast-foundation';
 import { TreeView } from '@microsoft/fast-foundation';
 
@@ -196,13 +197,40 @@ export const accentForegroundRest: SwatchRecipe;
 export const accentForegroundRestBehavior: import("@microsoft/fast-foundation").CSSCustomPropertyBehavior;
 
 // @public
+export const AccordionItemStyles: import("@microsoft/fast-element").ElementStyles;
+
+// @public
+export const AccordionStyles: import("@microsoft/fast-element").ElementStyles;
+
+// @public
 export type AnchorAppearance = ButtonAppearance | "hypertext";
+
+// @public
+export const AnchorStyles: import("@microsoft/fast-element").ElementStyles;
+
+// @public
+export const BadgeStyles: import("@microsoft/fast-element").ElementStyles;
 
 // @public
 export type ButtonAppearance = "accent" | "lightweight" | "neutral" | "outline" | "stealth";
 
 // @public
+export const ButtonStyles: import("@microsoft/fast-element").ElementStyles;
+
+// @public
+export const CardStyles: import("@microsoft/fast-element").ElementStyles;
+
+// @public
+export const CheckboxStyles: import("@microsoft/fast-element").ElementStyles;
+
+// @public
 export function createColorPalette(baseColor: any): string[];
+
+// @public
+export const DialogStyles: import("@microsoft/fast-element").ElementStyles;
+
+// @public
+export const DividerStyles: import("@microsoft/fast-element").ElementStyles;
 
 // @public
 export class FASTAccordion extends Accordion {
@@ -238,12 +266,8 @@ export class FASTButton extends Button {
 export class FASTCard extends Card {
 }
 
-// @public (undocumented)
+// @public
 export class FASTCarousel extends Carousel {
-}
-
-// @public (undocumented)
-export class FASTCarouselTestSlide extends CarouselTestSlide {
 }
 
 // @public
@@ -372,137 +396,73 @@ export const fastDesignSystemDefaults: FASTDesignSystem;
 // @public
 export class FASTDesignSystemProvider extends DesignSystemProvider implements FASTDesignSystem {
     accentBaseColor: string;
-    // (undocumented)
     accentFillActiveDelta: number;
-    // (undocumented)
     accentFillFocusDelta: number;
-    // (undocumented)
     accentFillHoverDelta: number;
-    // (undocumented)
     accentFillRestDelta: number;
-    // (undocumented)
     accentFillSelectedDelta: number;
-    // (undocumented)
     accentForegroundActiveDelta: number;
-    // (undocumented)
     accentForegroundFocusDelta: number;
-    // (undocumented)
     accentForegroundHoverDelta: number;
-    // (undocumented)
     accentForegroundRestDelta: number;
     accentPalette: string[];
     backgroundColor: string;
-    // (undocumented)
     baseHeightMultiplier: number;
-    // (undocumented)
     baseHorizontalSpacingMultiplier: number;
-    // (undocumented)
     baseLayerLuminance: number;
-    // (undocumented)
     cornerRadius: number;
-    // (undocumented)
-    density: 0;
-    // (undocumented)
+    density: number;
     designUnit: number;
-    // (undocumented)
     direction: Direction;
-    // (undocumented)
     disabledOpacity: number;
-    // (undocumented)
     focusOutlineWidth: number;
-    // (undocumented)
     neutralDividerRestDelta: number;
-    // (undocumented)
     neutralFillActiveDelta: number;
-    // (undocumented)
     neutralFillCardDelta: number;
-    // (undocumented)
     neutralFillFocusDelta: number;
-    // (undocumented)
     neutralFillHoverDelta: number;
-    // (undocumented)
     neutralFillInputActiveDelta: number;
-    // (undocumented)
     neutralFillInputFocusDelta: number;
-    // (undocumented)
     neutralFillInputHoverDelta: number;
-    // (undocumented)
     neutralFillInputRestDelta: number;
-    // (undocumented)
     neutralFillInputSelectedDelta: number;
-    // (undocumented)
     neutralFillRestDelta: number;
-    // (undocumented)
     neutralFillSelectedDelta: number;
-    // (undocumented)
     neutralFillStealthActiveDelta: number;
-    // (undocumented)
     neutralFillStealthFocusDelta: number;
-    // (undocumented)
     neutralFillStealthHoverDelta: number;
-    // (undocumented)
     neutralFillStealthRestDelta: number;
-    // (undocumented)
     neutralFillStealthSelectedDelta: number;
-    // (undocumented)
     neutralFillToggleActiveDelta: number;
-    // (undocumented)
     neutralFillToggleFocusDelta: number;
-    // (undocumented)
     neutralFillToggleHoverDelta: number;
-    // (undocumented)
     neutralForegroundActiveDelta: number;
-    // (undocumented)
     neutralForegroundFocusDelta: number;
-    // (undocumented)
     neutralForegroundHoverDelta: number;
-    // (undocumented)
     neutralOutlineActiveDelta: number;
-    // (undocumented)
     neutralOutlineFocusDelta: number;
-    // (undocumented)
     neutralOutlineHoverDelta: number;
-    // (undocumented)
     neutralOutlineRestDelta: number;
     neutralPalette: string[];
     noPaint: boolean;
-    // (undocumented)
     outlineWidth: number;
-    // (undocumented)
     typeRampBaseFontSize: string;
-    // (undocumented)
     typeRampBaseLineHeight: string;
-    // (undocumented)
     typeRampMinus1FontSize: string;
-    // (undocumented)
     typeRampMinus1LineHeight: string;
-    // (undocumented)
     typeRampMinus2FontSize: string;
-    // (undocumented)
     typeRampMinus2LineHeight: string;
-    // (undocumented)
     typeRampPlus1FontSize: string;
-    // (undocumented)
     typeRampPlus1LineHeight: string;
-    // (undocumented)
     typeRampPlus2FontSize: string;
-    // (undocumented)
     typeRampPlus2LineHeight: string;
-    // (undocumented)
     typeRampPlus3FontSize: string;
-    // (undocumented)
     typeRampPlus3LineHeight: string;
-    // (undocumented)
     typeRampPlus4FontSize: string;
-    // (undocumented)
     typeRampPlus4LineHeight: string;
-    // (undocumented)
     typeRampPlus5FontSize: string;
-    // (undocumented)
     typeRampPlus5LineHeight: string;
-    // (undocumented)
     typeRampPlus6FontSize: string;
-    // (undocumented)
     typeRampPlus6LineHeight: string;
 }
 
@@ -540,6 +500,10 @@ export class FASTRadio extends Radio {
 
 // @public
 export class FASTRadioGroup extends RadioGroup {
+}
+
+// @public
+export class FASTSkeleton extends Skeleton {
 }
 
 // @public
@@ -585,12 +549,19 @@ export class FASTTextField extends TextField {
 }
 
 // @public
+export class FASTTooltip extends Tooltip {
+}
+
+// @public
 export class FASTTreeItem extends TreeItem {
 }
 
 // @public
 export class FASTTreeView extends TreeView {
 }
+
+// @public
+export const FlipperStyles: import("@microsoft/fast-element").ElementStyles;
 
 // @public
 export const inlineEndBehavior: import("@microsoft/fast-foundation").CSSCustomPropertyBehavior;
@@ -600,6 +571,12 @@ export const inlineStartBehavior: import("@microsoft/fast-foundation").CSSCustom
 
 // @public
 export function isDarkMode(designSystem: FASTDesignSystem): boolean;
+
+// @public
+export const MenuItemStyles: import("@microsoft/fast-element").ElementStyles;
+
+// @public
+export const MenuStyles: import("@microsoft/fast-element").ElementStyles;
 
 // Warning: (ae-internal-missing-underscore) The name "neutralDividerRest" should be prefixed with an underscore because the declaration is marked as @internal
 //
@@ -684,6 +661,9 @@ export const neutralFillInputRestBehavior: import("@microsoft/fast-foundation").
 //
 // @internal (undocumented)
 export const neutralFillInputSelected: ColorRecipe<string>;
+
+// @public
+export const neutralFillInputSelectedBehavior: import("@microsoft/fast-foundation").CSSCustomPropertyBehavior;
 
 // Warning: (ae-internal-missing-underscore) The name "neutralFillRest" should be prefixed with an underscore because the declaration is marked as @internal
 //
@@ -971,6 +951,27 @@ export enum PaletteType {
 export const parseColorString: (color: string) => ColorRGBA64;
 
 // @public
+export const ProgressRingStyles: import("@microsoft/fast-element").ElementStyles;
+
+// @public
+export const ProgressStyles: import("@microsoft/fast-element").ElementStyles;
+
+// @public
+export const RadioGroupStyles: import("@microsoft/fast-element").ElementStyles;
+
+// @public
+export const RadioStyles: import("@microsoft/fast-element").ElementStyles;
+
+// @public
+export const SkeletonStyles: import("@microsoft/fast-element").ElementStyles;
+
+// @public
+export const SliderLabelStyles: import("@microsoft/fast-element").ElementStyles;
+
+// @public
+export const SliderStyles: import("@microsoft/fast-element").ElementStyles;
+
+// @public
 export enum StandardLuminance {
     // (undocumented)
     DarkMode = 0.23,
@@ -979,10 +980,34 @@ export enum StandardLuminance {
 }
 
 // @public
+export const SwitchStyles: import("@microsoft/fast-element").ElementStyles;
+
+// @public
+export const TabPanelStyles: import("@microsoft/fast-element").ElementStyles;
+
+// @public
+export const TabsStyles: import("@microsoft/fast-element").ElementStyles;
+
+// @public
+export const TabStyles: import("@microsoft/fast-element").ElementStyles;
+
+// @public
 export type TextAreaAppearance = "filled" | "outline";
 
 // @public
+export const TextAreaStyles: import("@microsoft/fast-element").ElementStyles;
+
+// @public
 export type TextFieldAppearance = "filled" | "outline";
+
+// @public
+export const TextFieldStyles: import("@microsoft/fast-element").ElementStyles;
+
+// @public
+export const TreeItemStyles: import("@microsoft/fast-element").ElementStyles;
+
+// @public
+export const TreeViewStyles: import("@microsoft/fast-element").ElementStyles;
 
 
 // (No @packageDocumentation comment for this package)

@@ -918,9 +918,14 @@ export class Tabs extends FASTElement {
     // (undocumented)
     activeTabIndex: number;
     adjust(adjustment: number): void;
+    // (undocumented)
+    change: () => void;
     // @internal (undocumented)
     connectedCallback(): void;
-    notabfocus: boolean;
+    // (undocumented)
+    focusTab(): void;
+    // (undocumented)
+    handleActiveIndicatorPosition(): void;
     orientation: TabsOrientation;
     // (undocumented)
     prevActiveTabIndex: number;
