@@ -490,18 +490,11 @@ export const DividerTemplate: import("@microsoft/fast-element").ViewTemplate<Div
 // @public
 export const endTemplate: import("@microsoft/fast-element").ViewTemplate<StartEnd, any>;
 
-// Warning: (ae-different-release-tags) This symbol has another declaration with a different release tag
-// Warning: (ae-internal-mixed-release-tag) Mixed release tags are not allowed for "Flipper" because one of its declarations is marked as @internal
-//
 // @public
 export class Flipper extends FASTElement {
     direction: FlipperDirection;
     disabled: boolean;
     hiddenFromAT: boolean;
-}
-
-// @internal
-export interface Flipper extends ARIAGlobalStatesAndProperties {
 }
 
 // @public

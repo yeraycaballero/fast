@@ -10,8 +10,6 @@ export const FlipperTemplate = html<Flipper>`
     <template
         role="button"
         aria-disabled="${x => (x.disabled ? true : void 0)}"
-        aria-label="${x => x.ariaLabel}"
-        aria-labelledby="${x => x.ariaLabelledby}"
         tabindex="${x => (x.hiddenFromAT ? -1 : 0)}"
         class="${x => x.direction} ${x => (x.disabled ? "disabled" : "")}"
     >
