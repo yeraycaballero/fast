@@ -35,7 +35,7 @@ export class Carousel extends Tabs {
      * HTML Attribute: autoplay
      */
     @attr({ mode: "boolean" })
-    public autoplay: boolean = true;
+    public autoplay: boolean;
 
     /**
      * Determines if the element should loop slides or not.
@@ -45,7 +45,7 @@ export class Carousel extends Tabs {
      * HTML Attribute: loop
      */
     @attr({ mode: "boolean" })
-    public loop: boolean = true;
+    public loop: boolean;
 
     /**
      * The state of the slides rotating or not.
@@ -55,7 +55,7 @@ export class Carousel extends Tabs {
      * HTML Attribute: paused
      */
     @attr({ mode: "boolean" })
-    public paused: boolean = false;
+    public paused: boolean;
     private pausedChanged(): void {
         if (!this.paused) {
             this.focused = false;
@@ -79,7 +79,7 @@ export class Carousel extends Tabs {
      * HTML Attribute: pattern
      */
     @attr({ attribute: "pattern" })
-    public pattern: string = CarouselPattern.tabbed;
+    public pattern: string;
 
     /**
      * Determines the interval for autoplay in miliseconds.
@@ -89,7 +89,7 @@ export class Carousel extends Tabs {
      * HTML Attribute: autoplay-interval
      */
     @attr({ attribute: "autoplay-interval" })
-    public autoplayInterval: number = 6000;
+    public autoplayInterval: number;
 
     /**
      * The id of the active slide.
@@ -131,7 +131,7 @@ export class Carousel extends Tabs {
      * HTML Attribute: next-button-aria-label
      */
     @attr({ attribute: "next-button-aria-label", mode: "fromView" })
-    public nextButtonAriaLabel: string = "next slide";
+    public nextButtonAriaLabel: string;
 
     /**
      * The aria-label to be passed to the previous button
@@ -142,7 +142,7 @@ export class Carousel extends Tabs {
      * HTML Attribute: previous-button-aria-label
      */
     @attr({ attribute: "previous-button-aria-label", mode: "fromView" })
-    public previousButtonAriaLabel: string = "previous slide";
+    public previousButtonAriaLabel: string;
 
     /**
      * Whether or not to focus the tab on change
@@ -280,10 +280,17 @@ export class Carousel extends Tabs {
         }
     }
 
+    /**
+     * @internal
+     */
+
     public handleFlipperClick(direction: 1 | -1, e: Event): void {
         this.incrementSlide(direction);
     }
 
+    /**
+     * @internal
+     */
     public handleFlipperKeypress = (direction: 1 | -1, e: KeyboardEvent): void => {
         switch (e.keyCode) {
             case keyCodeSpace:
@@ -300,6 +307,9 @@ export class Carousel extends Tabs {
         }
     };
 
+    /**
+     * @internal
+     */
     public handleDefaultFlipperKeypress = (direction: 1 | -1, e: KeyboardEvent): void => {
         switch (e.keyCode) {
             case keyCodeSpace:
@@ -499,6 +509,35 @@ export class Carousel extends Tabs {
      */
     public connectedCallback(): void {
         super.connectedCallback();
+
+        if (!this.autoplay) {
+            this.autoplay = true;
+        }
+
+        if (!this.loop) {
+            this.loop = true;
+        }
+
+        if (!this.paused) {
+            this.paused = false;
+        }
+
+        if (!this.pattern) {
+            this.pattern = CarouselPattern.tabbed;
+        }
+
+        if (!this.autoplayInterval) {
+            this.autoplayInterval = 6000;
+        }
+
+        if (!this.nextButtonAriaLabel) {
+            this.nextButtonAriaLabel = "next slide";
+        }
+
+        if (!this.previousButtonAriaLabel) {
+            this.previousButtonAriaLabel = "previous slide";
+        }
+
         if (this.autoplay) {
             this.startAutoPlay();
         } else {

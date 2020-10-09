@@ -15,6 +15,10 @@ const ltr = css`
     .next-flipper-container {
         right: 20px;
     }
+
+    .rotation-control-container {
+        left: 10px;
+    }
 `;
 
 const rtl = css`
@@ -24,6 +28,10 @@ const rtl = css`
 
     .next-flipper-container {
         left: 20px;
+    }
+
+    .rotation-control-container {
+        right: 10px;
     }
 `;
 
