@@ -531,14 +531,19 @@ export type RadioControl = Pick<HTMLInputElement, "checked" | "disabled" | "read
 
 // @public
 export class RadioGroup extends FASTElement {
-    constructor();
     // (undocumented)
     childItems: HTMLElement[];
+    // (undocumented)
+    clickHandler: (e: MouseEvent) => void;
     // @internal (undocumented)
     connectedCallback(): void;
     disabled: boolean;
+    // (undocumented)
+    disconnectedCallback(): void;
+    // (undocumented)
+    focusOutHandler: (e: FocusEvent) => boolean | void;
     // @internal
-    keydownHandler: (e: KeyboardEvent) => void;
+    keydownHandler: (e: KeyboardEvent) => boolean | void;
     name: string;
     // (undocumented)
     protected nameChanged(): void;
@@ -547,6 +552,8 @@ export class RadioGroup extends FASTElement {
     // @internal (undocumented)
     slottedRadioButtons: HTMLElement[];
     value: string;
+    // (undocumented)
+    protected valueChanged(): void;
 }
 
 // @public
@@ -944,7 +951,8 @@ export class TreeItem extends FASTElement {
     expanded: boolean;
     // (undocumented)
     focusable: boolean;
-    // (undocumented)
+    static focusItem(el: HTMLElement): void;
+    // @deprecated (undocumented)
     handleBlur: (e: FocusEvent) => void;
     // (undocumented)
     handleChange(source: any, propertyName: string): void;
@@ -952,7 +960,7 @@ export class TreeItem extends FASTElement {
     handleClick: (e: MouseEvent) => void;
     // (undocumented)
     handleExpandCollapseButtonClick: (e: MouseEvent) => void;
-    // (undocumented)
+    // @deprecated (undocumented)
     handleFocus: (e: Event) => void;
     handleKeyDown: (e: KeyboardEvent) => void | boolean;
     // (undocumented)
@@ -979,11 +987,11 @@ export class TreeView extends FASTElement {
     connectedCallback(): void;
     // (undocumented)
     currentSelected: HTMLElement | TreeItem | null;
-    // (undocumented)
+    // @deprecated (undocumented)
     focusable: boolean;
     // (undocumented)
     handleBlur: (e: FocusEvent) => void;
-    // (undocumented)
+    // @deprecated (undocumented)
     handleFocus: (e: FocusEvent) => void;
     // (undocumented)
     handleKeyDown: (e: KeyboardEvent) => void | boolean;
