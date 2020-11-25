@@ -886,7 +886,7 @@ export class AnchoredRegion extends FASTElement {
         this.initialLayoutComplete = true;
 
         if (positionChanged) {
-            this.$emit("change");
+            this.$emit("change", this, { bubbles: false });
         }
     };
 
