@@ -8,10 +8,10 @@ import {
 } from "@microsoft/fast-web-utilities";
 import { StartEnd } from "../patterns/start-end";
 import { applyMixins } from "../utilities/apply-mixins";
-import { MenuItemRole } from "./menu-item.options";
 import { AnchoredRegion } from "../anchored-region";
 import { Menu } from "../menu/menu";
 import { getDirection } from "../utilities/";
+import { MenuItemRole } from "./menu-item.options";
 
 export { MenuItemRole };
 
@@ -50,6 +50,7 @@ export class MenuItem extends FASTElement {
             } else {
                 this.currentDirection = getDirection(this);
             }
+            this.$emit("expanded-change", this, { bubbles: false });
         }
     }
 
@@ -144,9 +145,9 @@ export class MenuItem extends FASTElement {
     /**
      * @internal
      */
-    public handleAnchoredRegionChange = (e: Event): boolean => {
+    public handleAnchoredRegionChange = (e: Event): void => {
         if (e.defaultPrevented || this.disabled || this.submenuElements.length === 0) {
-            return false;
+            return;
         }
 
         e.preventDefault();
@@ -159,8 +160,6 @@ export class MenuItem extends FASTElement {
                 this.submenuElements[0].focus();
             }
         });
-
-        return false;
     };
 
     private toggleExpanded = (): void => {
@@ -171,7 +170,6 @@ export class MenuItem extends FASTElement {
         if (this.expanded) {
             DOM.queueUpdate(this.setRegionProps);
         }
-        this.$emit("expanded-change", this, { bubbles: false });
     };
 
     private invoke = (): void => {
@@ -204,7 +202,6 @@ export class MenuItem extends FASTElement {
         if (!this.expanded) {
             return;
         }
-        this.subMenuRegion.anchorElement = this as any;
         this.subMenuRegion.addEventListener("change", this.handleAnchoredRegionChange);
     };
 }
